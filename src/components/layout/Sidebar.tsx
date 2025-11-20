@@ -13,6 +13,7 @@ import {
     X
 } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { useAuth } from '../../context/AuthContext';
 
 interface SidebarProps {
     isOpen: boolean;
@@ -20,6 +21,8 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+    const { signOut } = useAuth();
+
     const navItems = [
         { icon: LayoutDashboard, label: 'Dashboard', to: '/dashboard' },
         { icon: TrendingUp, label: 'Receitas', to: '/receitas' },
@@ -29,6 +32,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         { icon: PieChart, label: 'Relatórios', to: '/relatorios' },
         { icon: Settings, label: 'Configurações', to: '/configuracoes' },
     ];
+
+    const handleLogout = async () => {
+        await signOut();
+    };
 
     return (
         <>
@@ -87,7 +94,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
                     {/* User Profile / Logout */}
                     <div className="border-t border-gray-100 p-4">
-                        <Button variant="ghost" className="w-full justify-start gap-3 text-red-600 hover:bg-red-50 hover:text-red-700">
+                        <Button
+                            variant="ghost"
+                            className="w-full justify-start gap-3 text-red-600 hover:bg-red-50 hover:text-red-700"
+                            onClick={handleLogout}
+                        >
                             <LogOut size={20} />
                             Sair
                         </Button>

@@ -1,9 +1,32 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
+import { useAuth } from '../../context/AuthContext';
 
 export const Login: React.FC = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const { signIn } = useAuth();
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+
+        const { error } = await signIn(email, password);
+
+        if (error) {
+            setError(error.message);
+            setLoading(false);
+        } else {
+            navigate('/dashboard');
+        }
+    };
+
     return (
         <div className="space-y-6">
             <div>
@@ -18,12 +41,21 @@ export const Login: React.FC = () => {
                 </p>
             </div>
 
-            <form className="space-y-6">
+            {error && (
+                <div className="p-4 rounded-md bg-red-50 text-sm text-red-700">
+                    {error}
+                </div>
+            )}
+
+            <form className="space-y-6" onSubmit={handleSubmit}>
                 <Input
                     label="E-mail"
                     type="email"
                     placeholder="seu@email.com"
                     fullWidth
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                 />
 
                 <Input
@@ -31,6 +63,9 @@ export const Login: React.FC = () => {
                     type="password"
                     placeholder="••••••••"
                     fullWidth
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                 />
 
                 <div className="flex items-center justify-between">
@@ -47,13 +82,13 @@ export const Login: React.FC = () => {
                     </div>
 
                     <div className="text-sm">
-                        <a href="#" className="font-medium text-primary-600 hover:text-primary-500">
+                        <Link to="/forgot-password" className="font-medium text-primary-600 hover:text-primary-500">
                             Esqueceu a senha?
-                        </a>
+                        </Link>
                     </div>
                 </div>
 
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" isLoading={loading}>
                     Entrar
                 </Button>
             </form>

@@ -9,13 +9,21 @@ Aplicação de gestão financeira pessoal.
 - `npm run build`: Gerar build de produção
 - `npm run lint`: Verificar código com ESLint
 
-## Configuração do Banco de Dados (Supabase)
-
-Cole o script SQL abaixo no Editor SQL do Supabase para criar a estrutura inicial do banco de dados.
-
-```sql
--- [COLE O SCRIPT SQL AQUI NA PRÓXIMA ETAPA]
-```
+## Configuração
+ 
+ 1. Crie um arquivo `.env` na raiz do projeto com as credenciais do Supabase:
+ ```env
+ VITE_SUPABASE_URL=sua_url_supabase
+ VITE_SUPABASE_ANON_KEY=sua_chave_anonima
+ ```
+ 
+ 2. Execute o script de banco de dados (já incluído em `supabase/schema.sql`) no painel do Supabase ou via script utilitário.
+ 
+ ## Funcionalidades
+ 
+ - **Autenticação**: Login, Cadastro, Recuperação de Senha (Supabase Auth)
+ - **Dashboard**: Visão geral (Placeholder)
+ - **Gestão**: Receitas, Despesas, Cartões, Bancos
 
 ## Estrutura do Projeto
 
