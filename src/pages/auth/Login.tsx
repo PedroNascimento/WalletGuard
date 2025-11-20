@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { useAuth } from '../../context/AuthContext';
+import { Shield } from 'lucide-react';
 
 export const Login: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -28,26 +29,34 @@ export const Login: React.FC = () => {
     };
 
     return (
-        <div className="space-y-6">
-            <div>
-                <h2 className="text-center text-2xl font-bold tracking-tight text-gray-900">
-                    Entrar na sua conta
+        <div className="space-y-8">
+            {/* Logo and Header */}
+            <div className="text-center">
+                <div className="flex justify-center mb-6">
+                    <div className="relative">
+                        <img
+                            src="/logo.png"
+                            alt="WalletGuard"
+                            className="h-28 w-auto"
+                        />
+                    </div>
+                </div>
+                <h2 className="text-3xl font-bold tracking-tight text-primary-900">
+                    Bem-vindo de volta
                 </h2>
-                <p className="mt-2 text-center text-sm text-gray-600">
-                    Ou{' '}
-                    <Link to="/signup" className="font-medium text-primary-600 hover:text-primary-500">
-                        crie uma nova conta
-                    </Link>
+                <p className="mt-3 text-base text-gray-600">
+                    Gerencie suas finanças com segurança e inteligência
                 </p>
             </div>
 
             {error && (
-                <div className="p-4 rounded-md bg-red-50 text-sm text-red-700">
-                    {error}
+                <div className="p-4 rounded-lg bg-red-50 border border-red-200 text-sm text-red-700 flex items-start gap-2">
+                    <Shield className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                    <span>{error}</span>
                 </div>
             )}
 
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-5" onSubmit={handleSubmit}>
                 <Input
                     label="E-mail"
                     type="email"
@@ -76,13 +85,13 @@ export const Login: React.FC = () => {
                             type="checkbox"
                             className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                         />
-                        <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                        <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
                             Lembrar-me
                         </label>
                     </div>
 
                     <div className="text-sm">
-                        <Link to="/forgot-password" className="font-medium text-primary-600 hover:text-primary-500">
+                        <Link to="/forgot-password" className="font-medium text-primary-600 hover:text-primary-700">
                             Esqueceu a senha?
                         </Link>
                     </div>
@@ -92,6 +101,15 @@ export const Login: React.FC = () => {
                     Entrar
                 </Button>
             </form>
+
+            <div className="text-center">
+                <p className="text-sm text-gray-600">
+                    Não tem uma conta?{' '}
+                    <Link to="/signup" className="font-semibold text-primary-600 hover:text-primary-700">
+                        Criar conta gratuita
+                    </Link>
+                </p>
+            </div>
         </div>
     );
 };

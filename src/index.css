@@ -5,17 +5,17 @@
   --font-sans: 'Inter', sans-serif;
   --font-heading: 'Poppins', sans-serif;
 
-  --color-primary-50: #f0fdfa;
-  --color-primary-100: #ccfbf1;
-  --color-primary-200: #99f6e4;
-  --color-primary-300: #5eead4;
-  --color-primary-400: #2dd4bf;
-  --color-primary-500: #14b8a6;
-  --color-primary-600: #0d9488;
-  --color-primary-700: #0f766e;
-  --color-primary-800: #115e59;
-  --color-primary-900: #134e4a;
-  --color-primary-950: #042f2e;
+  --color-primary-50: #e8f4f8;
+  --color-primary-100: #d1e9f1;
+  --color-primary-200: #a3d3e3;
+  --color-primary-300: #75bdd5;
+  --color-primary-400: #5FA8D3;
+  --color-primary-500: #3a8bb8;
+  --color-primary-600: #2e6f93;
+  --color-primary-700: #1B4965;
+  --color-primary-800: #163a52;
+  --color-primary-900: #0f2838;
+  --color-primary-950: #0a1b26;
 }
 
 @layer base {

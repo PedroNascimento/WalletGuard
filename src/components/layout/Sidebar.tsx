@@ -57,12 +57,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             >
                 <div className="flex h-full flex-col">
                     {/* Logo */}
-                    <div className="flex h-16 items-center justify-between px-6 border-b border-gray-100">
-                        <div className="flex items-center gap-2">
-                            <div className="h-8 w-8 rounded-lg bg-primary-600 flex items-center justify-center">
-                                <span className="text-white font-bold text-xl">W</span>
-                            </div>
-                            <span className="text-xl font-bold text-gray-900">WalletGuard</span>
+                    <div className="flex h-28 items-center justify-between px-6 border-b border-gray-100">
+                        <div className="flex items-center gap-3">
+                            <img
+                                src="/logo.png"
+                                alt="WalletGuard"
+                                className="h-28 w-auto"
+                            />
                         </div>
                         <button
                             onClick={onClose}
