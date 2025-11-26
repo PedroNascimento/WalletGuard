@@ -18,9 +18,10 @@ import { useAuth } from '../../context/AuthContext';
 interface SidebarProps {
     isOpen: boolean;
     onClose: () => void;
+    isCollapsed: boolean;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed }) => {
     const { signOut } = useAuth();
 
     const navItems = [
@@ -51,23 +52,26 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             {/* Sidebar */}
             <aside
                 className={cn(
-                    "fixed top-0 left-0 z-50 h-full w-64 bg-white border-r border-gray-200 transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:h-screen",
-                    isOpen ? "translate-x-0" : "-translate-x-full"
+                    "fixed top-0 left-0 z-50 h-full bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 transition-all duration-300 ease-in-out overflow-hidden",
+                    // Mobile behavior
+                    "w-64",
+                    isOpen ? "translate-x-0" : "-translate-x-full",
+                    // Desktop behavior
+                    "lg:translate-x-0 lg:static lg:h-screen",
+                    isCollapsed ? "lg:w-0 lg:border-none" : "lg:w-64"
                 )}
             >
-                <div className="flex h-full flex-col">
-                    {/* Logo */}
-                    <div className="flex h-28 items-center justify-between px-6 border-b border-gray-100">
+                <div className="flex h-full flex-col w-64">
+                    {/* Brand */}
+                    <div className="flex h-20 items-center justify-between px-6 border-b border-gray-100 dark:border-gray-800">
                         <div className="flex items-center gap-3">
-                            <img
-                                src="/logo.png"
-                                alt="WalletGuard"
-                                className="h-28 w-auto"
-                            />
+                            <h1 className="text-2xl font-heading font-bold text-primary-700 dark:text-primary-300">
+                                WalletGuard
+                            </h1>
                         </div>
                         <button
                             onClick={onClose}
-                            className="lg:hidden p-1 rounded-md hover:bg-gray-100 text-gray-500"
+                            className="lg:hidden p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400"
                         >
                             <X size={20} />
                         </button>
@@ -83,21 +87,21 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                                 className={({ isActive }) => cn(
                                     "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
                                     isActive
-                                        ? "bg-primary-50 text-primary-700"
-                                        : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                                        ? "bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300"
+                                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white"
                                 )}
                             >
-                                <item.icon size={20} />
+                                <item.icon size={20} className="shrink-0" />
                                 {item.label}
                             </NavLink>
                         ))}
                     </nav>
 
                     {/* User Profile / Logout */}
-                    <div className="border-t border-gray-100 p-4">
+                    <div className="border-t border-gray-100 dark:border-gray-800 p-4">
                         <Button
                             variant="ghost"
-                            className="w-full justify-start gap-3 text-red-600 hover:bg-red-50 hover:text-red-700"
+                            className="w-full justify-start gap-3 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-700 dark:text-red-400"
                             onClick={handleLogout}
                         >
                             <LogOut size={20} />

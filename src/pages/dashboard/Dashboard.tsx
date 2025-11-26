@@ -43,10 +43,10 @@ export const Dashboard: React.FC = () => {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold text-primary-900">Dashboard</h1>
-                    <p className="text-gray-600 mt-1">Visão geral das suas finanças</p>
+                    <h1 className="text-3xl font-bold text-primary-900 dark:text-primary-100">Dashboard</h1>
+                    <p className="text-gray-600 dark:text-gray-400 mt-1">Visão geral das suas finanças</p>
                 </div>
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-gray-500 dark:text-gray-400">
                     Última atualização: {new Date().toLocaleDateString('pt-BR')}
                 </div>
             </div>
@@ -61,36 +61,36 @@ export const Dashboard: React.FC = () => {
                         <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
                             <div className="flex items-start justify-between">
                                 <div className="flex-1">
-                                    <p className="text-sm font-medium text-gray-600">{stat.title}</p>
-                                    <p className="text-2xl font-bold text-gray-900 mt-2">{stat.value}</p>
+                                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{stat.title}</p>
+                                    <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2">{stat.value}</p>
                                     <div className="flex items-center gap-1 mt-2">
                                         {TrendIcon && (
                                             <TrendIcon
-                                                className={`h-4 w-4 ${stat.trend === 'up' ? 'text-green-600' : 'text-red-600'
+                                                className={`h-4 w-4 ${stat.trend === 'up' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                                                     }`}
                                             />
                                         )}
                                         <span
                                             className={`text-sm font-medium ${stat.trend === 'up'
-                                                    ? 'text-green-600'
-                                                    : stat.trend === 'down'
-                                                        ? 'text-red-600'
-                                                        : 'text-gray-600'
+                                                ? 'text-green-600 dark:text-green-400'
+                                                : stat.trend === 'down'
+                                                    ? 'text-red-600 dark:text-red-400'
+                                                    : 'text-gray-600 dark:text-gray-400'
                                                 }`}
                                         >
                                             {stat.change}
                                         </span>
                                     </div>
                                 </div>
-                                <div className={`p-3 rounded-lg ${stat.color === 'primary' ? 'bg-primary-100' :
-                                        stat.color === 'green' ? 'bg-green-100' :
-                                            stat.color === 'red' ? 'bg-red-100' :
-                                                'bg-blue-100'
+                                <div className={`p-3 rounded-lg ${stat.color === 'primary' ? 'bg-primary-100 dark:bg-primary-900/30' :
+                                    stat.color === 'green' ? 'bg-green-100 dark:bg-green-900/30' :
+                                        stat.color === 'red' ? 'bg-red-100 dark:bg-red-900/30' :
+                                            'bg-blue-100 dark:bg-blue-900/30'
                                     }`}>
-                                    <Icon className={`h-6 w-6 ${stat.color === 'primary' ? 'text-primary-700' :
-                                            stat.color === 'green' ? 'text-green-700' :
-                                                stat.color === 'red' ? 'text-red-700' :
-                                                    'text-blue-700'
+                                    <Icon className={`h-6 w-6 ${stat.color === 'primary' ? 'text-primary-700 dark:text-primary-300' :
+                                        stat.color === 'green' ? 'text-green-700 dark:text-green-300' :
+                                            stat.color === 'red' ? 'text-red-700 dark:text-red-300' :
+                                                'text-blue-700 dark:text-blue-300'
                                         }`} />
                                 </div>
                             </div>
@@ -102,16 +102,16 @@ export const Dashboard: React.FC = () => {
             {/* Recent Activity Placeholder */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <Card className="p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Transações Recentes</h3>
-                    <div className="text-center py-12 text-gray-500">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Transações Recentes</h3>
+                    <div className="text-center py-12 text-gray-500 dark:text-gray-400">
                         <p>Nenhuma transação registrada ainda</p>
                         <p className="text-sm mt-2">Comece adicionando receitas ou despesas</p>
                     </div>
                 </Card>
 
                 <Card className="p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Resumo por Categoria</h3>
-                    <div className="text-center py-12 text-gray-500">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Resumo por Categoria</h3>
+                    <div className="text-center py-12 text-gray-500 dark:text-gray-400">
                         <p>Dados insuficientes</p>
                         <p className="text-sm mt-2">Adicione transações para ver o resumo</p>
                     </div>

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
 import { Shield } from 'lucide-react';
 
 export const Login: React.FC = () => {
@@ -11,6 +12,7 @@ export const Login: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const { signIn } = useAuth();
+    const { theme } = useTheme();
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -35,16 +37,16 @@ export const Login: React.FC = () => {
                 <div className="flex justify-center mb-6">
                     <div className="relative">
                         <img
-                            src="/logo.png"
+                            src={theme === 'dark' ? "/logo-dark.png" : "/logo.png"}
                             alt="WalletGuard"
-                            className="h-28 w-auto"
+                            className="h-28 w-auto object-contain"
                         />
                     </div>
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight text-primary-900">
-                    Bem-vindo de volta
+                <h2 className="text-3xl font-bold tracking-tight text-primary-900 dark:text-primary-100">
+                    Bem-vindo
                 </h2>
-                <p className="mt-3 text-base text-gray-600">
+                <p className="mt-3 text-base text-gray-600 dark:text-gray-400">
                     Gerencie suas finanças com segurança e inteligência
                 </p>
             </div>
@@ -85,13 +87,13 @@ export const Login: React.FC = () => {
                             type="checkbox"
                             className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                         />
-                        <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+                        <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                             Lembrar-me
                         </label>
                     </div>
 
                     <div className="text-sm">
-                        <Link to="/forgot-password" className="font-medium text-primary-600 hover:text-primary-700">
+                        <Link to="/forgot-password" className="font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300">
                             Esqueceu a senha?
                         </Link>
                     </div>
@@ -103,9 +105,9 @@ export const Login: React.FC = () => {
             </form>
 
             <div className="text-center">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
                     Não tem uma conta?{' '}
-                    <Link to="/signup" className="font-semibold text-primary-600 hover:text-primary-700">
+                    <Link to="/signup" className="font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300">
                         Criar conta gratuita
                     </Link>
                 </p>
