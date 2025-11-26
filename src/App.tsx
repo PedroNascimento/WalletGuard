@@ -8,7 +8,7 @@ import { Login } from './pages/auth/Login';
 import { Signup } from './pages/auth/Signup';
 import { ForgotPassword } from './pages/auth/ForgotPassword';
 import { Dashboard } from './pages/dashboard/Dashboard';
-import { Incomes } from './pages/transactions/Incomes';
+import { Receitas } from './pages/receitas/Receitas';
 import { Expenses } from './pages/transactions/Expenses';
 import { Cards } from './pages/cards/Cards';
 import { Banks } from './pages/banks/Banks';
@@ -36,7 +36,7 @@ function App() {
             }>
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/receitas" element={<Incomes />} />
+              <Route path="/receitas" element={<Receitas />} />
               <Route path="/despesas" element={<Expenses />} />
               <Route path="/cartoes" element={<Cards />} />
               <Route path="/bancos" element={<Banks />} />
