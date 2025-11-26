@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { cn } from '../../utils/cn';
 import {
     LayoutDashboard,
@@ -23,6 +23,7 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed }) => {
     const { signOut } = useAuth();
+    const navigate = useNavigate();
 
     const navItems = [
         { icon: LayoutDashboard, label: 'Dashboard', to: '/dashboard' },
@@ -35,7 +36,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed }
     ];
 
     const handleLogout = async () => {
-        await signOut();
+        try {
+            const { error } = await signOut();
+            if (error) {
+                console.error('Erro ao fazer logout:', error);
+                return;
+            }
+            // Redirecionar para login
+            navigate('/login', { replace: true });
+        } catch (err) {
+            console.error('Erro inesperado ao fazer logout:', err);
+        }
     };
 
     return (

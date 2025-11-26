@@ -64,9 +64,22 @@ export const receitasService = {
 
     // Criar nova receita
     async create(receita: ReceitaFormData) {
+        // Obter o usuário autenticado
+        const { data: { user } } = await supabase.auth.getUser();
+
+        if (!user) {
+            throw new Error('Usuário não autenticado');
+        }
+
+        // Adicionar user_id aos dados
+        const receitaComUserId = {
+            ...receita,
+            user_id: user.id
+        };
+
         const { data, error } = await supabase
             .from('receitas')
-            .insert([receita])
+            .insert([receitaComUserId])
             .select()
             .single();
 

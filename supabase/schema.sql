@@ -52,6 +52,24 @@ CREATE TABLE IF NOT EXISTS incomes (
 );
 CREATE INDEX IF NOT EXISTS idx_incomes_user_date ON incomes(user_id, date);
 
+-- Receitas (nova estrutura detalhada)
+CREATE TABLE IF NOT EXISTS receitas (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL,
+  descricao text NOT NULL,
+  valor numeric(14,2) NOT NULL,
+  data date NOT NULL,
+  categoria text NOT NULL,
+  recorrente boolean DEFAULT false,
+  frequencia_recorrencia text CHECK (frequencia_recorrencia IN ('semanal', 'mensal', 'anual')),
+  observacoes text,
+  created_at timestamptz DEFAULT now(),
+  updated_at timestamptz DEFAULT now(),
+  CONSTRAINT fk_receitas_user FOREIGN KEY(user_id) REFERENCES app_users(id) ON DELETE CASCADE
+);
+CREATE INDEX IF NOT EXISTS idx_receitas_user_date ON receitas(user_id, data);
+CREATE INDEX IF NOT EXISTS idx_receitas_categoria ON receitas(user_id, categoria);
+
 -- Despesas gerais (expenses)
 CREATE TABLE IF NOT EXISTS expenses (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -108,6 +126,21 @@ CREATE POLICY cards_is_owner ON cards
 
 ALTER TABLE incomes ENABLE ROW LEVEL SECURITY;
 CREATE POLICY incomes_is_owner ON incomes
+  USING (user_id = current_setting('request.jwt.claim.sub', true)::uuid);
+
+-- RLS para tabela receitas (com políticas completas para CRUD)
+ALTER TABLE receitas ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY receitas_select ON receitas FOR SELECT
+  USING (user_id = current_setting('request.jwt.claim.sub', true)::uuid);
+
+CREATE POLICY receitas_insert ON receitas FOR INSERT
+  WITH CHECK (user_id = current_setting('request.jwt.claim.sub', true)::uuid);
+
+CREATE POLICY receitas_update ON receitas FOR UPDATE
+  USING (user_id = current_setting('request.jwt.claim.sub', true)::uuid);
+
+CREATE POLICY receitas_delete ON receitas FOR DELETE
   USING (user_id = current_setting('request.jwt.claim.sub', true)::uuid);
 
 ALTER TABLE expenses ENABLE ROW LEVEL SECURITY;
