@@ -14,7 +14,7 @@ interface DespesaFormProps {
 export const DespesaForm: React.FC<DespesaFormProps> = ({ despesa, onSubmit, onCancel }) => {
     const [formData, setFormData] = useState<DespesaFormData>({
         descricao: '',
-        valor: 0,
+        valor: '' as any,
         data: new Date().toISOString().split('T')[0],
         categoria: CATEGORIAS_DESPESA[0],
         tipo: 'variavel',

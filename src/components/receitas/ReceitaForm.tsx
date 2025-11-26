@@ -20,7 +20,7 @@ export const ReceitaForm: React.FC<ReceitaFormProps> = ({
 }) => {
     const [formData, setFormData] = useState<ReceitaFormData>({
         descricao: '',
-        valor: 0,
+        valor: '' as any,
         data: new Date().toISOString().split('T')[0],
         categoria: 'Salário',
         recorrente: false,
