@@ -1,0 +1,144 @@
+
+> temp_init@0.0.0 lint
+> eslint .
+
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\components\bancos\BancoForm.tsx
+  22:24  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  62:57  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\components\despesas\DespesaForm.tsx
+  20:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\components\receitas\ReceitaForm.tsx
+  23:22  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-explicit-any
+  35:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\components\receitas\ReceitaForm.tsx:35:13
+  33 |     useEffect(() => {
+  34 |         if (receita) {
+> 35 |             setFormData({
+     |             ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  36 |                 descricao: receita.descricao,
+  37 |                 valor: receita.valor,
+  38 |                 data: receita.data,  react-hooks/set-state-in-effect
+  84:64  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-explicit-any
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\components\ui\Input.tsx
+  13:31  error  React Hook "React.useId" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\components\ui\Select.tsx
+  19:32  error  React Hook "React.useId" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\context\AuthContext.tsx
+   9:67  error  Unexpected any. Specify a different type                                                                                        @typescript-eslint/no-explicit-any
+  10:81  error  Unexpected any. Specify a different type                                                                                        @typescript-eslint/no-explicit-any
+  11:37  error  Unexpected any. Specify a different type                                                                                        @typescript-eslint/no-explicit-any
+  12:56  error  Unexpected any. Specify a different type                                                                                        @typescript-eslint/no-explicit-any
+  27:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\context\ThemeContext.tsx
+  51:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\context\ToastContext.tsx
+  19:14  error    Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      react-refresh/only-export-components
+  36:13  error    Error: Cannot access variable before it is declared
+
+`removeToast` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\context\ToastContext.tsx:36:13
+  34 |         // Auto remove after 3 seconds
+  35 |         setTimeout(() => {
+> 36 |             removeToast(id);
+     |             ^^^^^^^^^^^ `removeToast` accessed before it is declared
+  37 |         }, 3000);
+  38 |     }, []);
+  39 |
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\context\ToastContext.tsx:40:5
+  38 |     }, []);
+  39 |
+> 40 |     const removeToast = useCallback((id: string) => {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 41 |         setToasts(state => state.filter(toast => toast.id !== id));
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 42 |     }, []);
+     | ^^^^^^^^^^^^ `removeToast` is declared here
+  43 |
+  44 |     return (
+  45 |         <ToastContext.Provider value={{ addToast, removeToast }}>  react-hooks/immutability
+  38:8   warning  React Hook useCallback has a missing dependency: 'removeToast'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    react-hooks/exhaustive-deps
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\pages\bancos\Bancos.tsx
+   43:8   warning  React Hook useEffect has a missing dependency: 'loadBancos'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  137:25  error    Unexpected any. Specify a different type                                                                       @typescript-eslint/no-explicit-any
+  258:95  error    Unexpected any. Specify a different type                                                                       @typescript-eslint/no-explicit-any
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\pages\cartoes\Cartoes.tsx
+  33:8   warning  React Hook useEffect has a missing dependency: 'loadCartoes'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  86:25  error    Unexpected any. Specify a different type                                                                        @typescript-eslint/no-explicit-any
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\pages\cartoes\GastosCartao.tsx
+  29:8   warning  React Hook useEffect has a missing dependency: 'loadCardAndExpenses'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  56:46  error    Unexpected any. Specify a different type                                                                                @typescript-eslint/no-explicit-any
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\pages\dashboard\Dashboard.tsx
+  16:66  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\pages\despesas\Despesas.tsx
+   43:8   warning  React Hook useEffect has missing dependencies: 'loadDespesas' and 'loadStats'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  120:25  error    Unexpected any. Specify a different type                                                                                           @typescript-eslint/no-explicit-any
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\pages\receitas\Receitas.tsx
+   41:8   warning  React Hook useEffect has missing dependencies: 'loadReceitas' and 'loadStats'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  116:25  error    Unexpected any. Specify a different type                                                                                           @typescript-eslint/no-explicit-any
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\pages\relatorios\Relatorios.tsx
+  34:8   warning  React Hook useEffect has a missing dependency: 'fetchData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  89:58  error    Unexpected any. Specify a different type                                                                      @typescript-eslint/no-explicit-any
+  94:33  error    Unexpected any. Specify a different type                                                                      @typescript-eslint/no-explicit-any
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\services\bancos.service.ts
+  110:31  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  189:52  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  190:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  191:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  192:46  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\services\cards.service.ts
+  155:9  error  'startDate' is never reassigned. Use 'const' instead  prefer-const
+  160:9  error  'endDate' is never reassigned. Use 'const' instead    prefer-const
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\services\dashboard.service.ts
+  143:99  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  150:99  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\services\despesas.service.ts
+  110:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  160:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  241:52  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  242:39  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  243:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  244:45  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  245:75  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\services\receitas.service.ts
+  163:52  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  164:45  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  165:75  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\services\user.service.ts
+  31:24  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Pedro\Desktop\micro-saas\WalletGuard\src\types\relatorio.ts
+  14:20  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  22:20  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+Ô£û 54 problems (47 errors, 7 warnings)
+
