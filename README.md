@@ -116,6 +116,7 @@ http://localhost:5173
 
 ### Guias de Setup
 - 📄 [DEPLOY_GUIDE.md](DEPLOY_GUIDE.md) - Guia completo de Deploy (Supabase + Vercel)
+- 📄 [PWA_GUIDE.md](PWA_GUIDE.md) - Guia de Instalação Mobile (PWA)
 - 📄 [QA_CHECKLIST.md](QA_CHECKLIST.md) - Checklist de Qualidade antes do deploy
 - 📄 [FINAL_SCHEMA.sql](FINAL_SCHEMA.sql) - Schema SQL completo do banco de dados
 - 📄 [CRIAR_TABELA_RECEITAS.md](CRIAR_TABELA_RECEITAS.md) - Setup da tabela de receitas
