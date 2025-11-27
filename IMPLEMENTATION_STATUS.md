@@ -28,6 +28,7 @@
 - ✅ `supabase/add-expenses-columns.sql` - Adicionou colunas faltantes em `expenses`
 - ✅ `supabase/add-expenses-rls.sql` - Adicionou RLS em `expenses`
 - ✅ `supabase/setup-banks.sql` - Adicionou coluna `balance` e RLS em `banks`
+- ✅ `SETUP_CARDS.md` - Configuração completa de cartões e despesas de cartão
 
 ---
 
@@ -76,7 +77,7 @@
 
 ### ✅ 3. Feature Implementation: Connect pages to the database
 
-**Status: PARCIALMENTE IMPLEMENTADO (75%)**
+**Status: QUASE COMPLETO (90%)**
 
 #### O que foi feito:
 
@@ -98,13 +99,18 @@
 - **Página**: `src/pages/bancos/Bancos.tsx`
 - **Features**: Listagem, filtros, estatísticas de saldo, CRUD completo, cores personalizadas.
 
+##### ✅ CRUD de Cartões (100% completo)
+- **Service**: `src/services/cards.service.ts`
+- **Componentes**: `CardForm`, `CardExpenseForm`
+- **Página**: `src/pages/cartoes/Cartoes.tsx`, `src/pages/cartoes/GastosCartao.tsx`
+- **Features**: CRUD de cartões, gestão de limites, lançamento de despesas com parcelamento, visualização de faturas.
+
 ##### ✅ Dashboard (100% completo)
 - **Service**: `src/services/dashboard.service.ts`
 - **Página**: `src/pages/dashboard/Dashboard.tsx`
 - **Features**: Dados reais de receitas, despesas e saldo.
 
 ##### ⚠️ Outras Features (Não implementadas)
-- ❌ **Cartões** - Página placeholder
 - ❌ **Relatórios** - Página placeholder
 - ❌ **Configurações** - Página placeholder
 
@@ -112,8 +118,8 @@
 - ✅ Receitas: Totalmente conectado
 - ✅ Despesas: Totalmente conectado
 - ✅ Bancos: Totalmente conectado
+- ✅ Cartões: Totalmente conectado
 - ✅ Dashboard: Totalmente conectado
-- ❌ Cartões: Não conectado
 
 ---
 
@@ -123,27 +129,23 @@
 |-------|--------|------------|-------------|
 | **1. Database Setup** | ✅ Completo | 100% | Scripts SQL criados e documentados |
 | **2. Authentication** | ✅ Completo | 100% | Totalmente funcional com Supabase Auth |
-| **3. Feature Implementation** | ⚠️ Parcial | 75% | Receitas, Despesas, Bancos e Dashboard prontos |
+| **3. Feature Implementation** | ⚠️ Parcial | 90% | Faltam apenas Relatórios e Configurações |
 
 ---
 
 ## Próximos Passos Recomendados
 
 ### Prioridade Alta
-1. **Implementar CRUD de Cartões**
-   - Criar service, componentes e página
-   - Implementar lógica de faturas e limites
-   
-2. **Implementar Relatórios**
+1. **Implementar Relatórios**
    - Gráficos de receitas vs despesas
    - Gráficos por categoria
 
 ### Prioridade Média
-3. **Implementar Configurações de usuário**
-4. **Adicionar exportação de dados**
+2. **Implementar Configurações de usuário**
+3. **Adicionar exportação de dados**
 
 ### Prioridade Baixa
-5. **Implementar notificações**
+4. **Implementar notificações**
 
 ---
 
@@ -162,22 +164,23 @@
 - `src/services/receitas.service.ts`
 - `src/services/despesas.service.ts`
 - `src/services/bancos.service.ts`
+- `src/services/cards.service.ts`
 - `src/pages/receitas/Receitas.tsx`
 - `src/pages/despesas/Despesas.tsx`
 - `src/pages/bancos/Bancos.tsx`
+- `src/pages/cartoes/Cartoes.tsx`
 
 ### Documentação
 - `README.md` - Documentação geral do projeto
 - `FINAL_STATUS.md` - Status detalhado
 - `SETUP_BANKS.md` - Setup de bancos
 - `SETUP_EXPENSES_COMPLETO.md` - Setup de despesas
+- `SETUP_CARDS.md` - Setup de cartões
 
 ---
 
 ## Conclusão
 
-O projeto WalletGuard avançou significativamente com a implementação dos módulos de **Despesas** e **Bancos**. A base está sólida e funcional.
+O projeto WalletGuard está quase completo. Os módulos principais (Receitas, Despesas, Bancos, Cartões) estão funcionais.
 
-**Falta implementar**: Cartões e Relatórios.
-
-**Estimativa**: O módulo de Cartões é o mais complexo restante, estimado em 3-4 horas.
+**Falta implementar**: Relatórios e Configurações.

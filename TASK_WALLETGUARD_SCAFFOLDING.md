@@ -2,7 +2,7 @@
 
 **Data de Atualização:** 26/11/2025 21:35  
 **Versão:** 1.2.0  
-**Status Geral:** 90% Completo
+**Status Geral:** 95% Completo
 
 ---
 
@@ -12,7 +12,7 @@ O WalletGuard é uma aplicação de gestão financeira pessoal desenvolvida com 
 
 ---
 
-## ✅ IMPLEMENTADO (90%)
+## ✅ IMPLEMENTADO (95%)
 
 ### 1. Configuração Inicial do Projeto ✅ 100%
 
@@ -175,9 +175,27 @@ O WalletGuard é uma aplicação de gestão financeira pessoal desenvolvida com 
 - `src/services/bancos.service.ts`
 - `src/pages/bancos/Bancos.tsx`
 
+- `src/pages/bancos/Bancos.tsx`
+
 ---
 
-### 7. Dashboard ✅ 100%
+### 7. CRUD de Cartões ✅ 100%
+
+#### Funcionalidades
+- ✅ Listagem de cartões
+- ✅ CRUD completo com limites e datas
+- ✅ Lançamento de despesas com parcelamento
+- ✅ Visualização de faturas
+- ✅ Cálculo de uso do limite
+
+**Arquivos:**
+- `src/services/cards.service.ts`
+- `src/pages/cartoes/Cartoes.tsx`
+- `src/pages/cartoes/GastosCartao.tsx`
+
+---
+
+### 8. Dashboard ✅ 100%
 
 #### Funcionalidades
 - ✅ Dados reais de receitas e despesas
@@ -191,7 +209,7 @@ O WalletGuard é uma aplicação de gestão financeira pessoal desenvolvida com 
 
 ---
 
-### 8. UI/UX ✅ 100%
+### 9. UI/UX ✅ 100%
 
 - ✅ Dark mode completo
 - ✅ Responsividade total
@@ -200,32 +218,9 @@ O WalletGuard é uma aplicação de gestão financeira pessoal desenvolvida com 
 
 ---
 
-## ⚠️ PENDENTE (10%)
+## ⚠️ PENDENTE (5%)
 
-### 1. CRUD de Cartões ❌ 0%
-
-**Prioridade:** Alta  
-**Estimativa:** 3-4 horas
-
-#### O que fazer:
-1. Criar `src/types/cartao.ts`
-2. Criar `src/services/cartoes.service.ts`
-3. Criar componentes de formulário
-4. Criar página de listagem
-5. Implementar cálculo de fatura
-
-#### Campos necessários:
-- Nome do cartão
-- Bandeira
-- Banco vinculado (FK)
-- Limite
-- Dia de fechamento
-- Dia de vencimento
-- Cor
-
----
-
-### 2. Página de Relatórios ❌ 0%
+### 1. Página de Relatórios ❌ 0%
 
 **Prioridade:** Média  
 **Estimativa:** 4-6 horas
@@ -259,7 +254,7 @@ O WalletGuard é uma aplicação de gestão financeira pessoal desenvolvida com 
 
 ### Funcionalidades
 - **Autenticação:** 100%
-- **CRUDs Completos:** 3 (Receitas, Despesas, Bancos)
+- **CRUDs Completos:** 4 (Receitas, Despesas, Bancos, Cartões)
 - **Dashboard:** 100%
 - **Dark Mode:** 100%
 
@@ -270,12 +265,12 @@ O WalletGuard é uma aplicação de gestão financeira pessoal desenvolvida com 
 ### Fase 1: Fundação ✅ COMPLETA
 - ✅ Setup, Auth, UI Base
 
-### Fase 2: Features Core ✅ 90% COMPLETA
+### Fase 2: Features Core ✅ COMPLETA
 - ✅ Receitas
 - ✅ Despesas
 - ✅ Bancos
 - ✅ Dashboard
-- ❌ Cartões
+- ✅ Cartões
 
 ### Fase 3: Features Avançadas ❌ 0%
 - ❌ Relatórios
@@ -299,7 +294,7 @@ O WalletGuard é uma aplicação de gestão financeira pessoal desenvolvida com 
 - [x] CRUD de Despesas
 - [x] CRUD de Bancos
 - [x] Dashboard com dados reais
-- [ ] CRUD de Cartões
+- [x] CRUD de Cartões
 - [ ] Relatórios
 - [ ] Configurações
 
@@ -316,9 +311,10 @@ O WalletGuard é uma aplicação de gestão financeira pessoal desenvolvida com 
 7. ✅ **BUGFIX_RECEITAS.md** - Correção de bugs
 8. ✅ **RECEITAS_README.md** - Documentação de Receitas
 9. ✅ **DESPESAS_README.md** - Documentação de Despesas
+10. ✅ **SETUP_CARDS.md** - Setup de Cartões
    - Gráficos por categoria
 
 ---
 
-**Status Geral:** 90% Completo  
+**Status Geral:** 95% Completo  
 **Última Atualização:** 26/11/2025 21:35

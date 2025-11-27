@@ -182,7 +182,33 @@
 
 ---
 
-### 6. Interface e UX ✅
+### 6. Cartões de Crédito ✅
+**Status:** Completo e Funcional
+
+#### Funcionalidades
+- ✅ CRUD completo (Create, Read, Update, Delete)
+- ✅ Gestão de limites e datas (fechamento/vencimento)
+- ✅ Lançamento de despesas com parcelamento
+- ✅ Geração automática de parcelas futuras
+- ✅ Visualização de faturas por mês
+- ✅ Cálculo de totais da fatura e uso do limite
+- ✅ Navegação entre faturas (anteriores/futuras)
+- ✅ Dark mode completo
+
+#### Arquivos
+- `src/types/card.ts`
+- `src/services/cards.service.ts`
+- `src/components/cartoes/CardForm.tsx`
+- `src/components/cartoes/CardExpenseForm.tsx`
+- `src/pages/cartoes/Cartoes.tsx`
+- `src/pages/cartoes/GastosCartao.tsx`
+
+#### Scripts SQL
+- ✅ `SETUP_CARDS.md` - Criação de tabelas e RLS
+
+---
+
+### 7. Interface e UX ✅
 **Status:** Completo e Funcional
 
 #### Funcionalidades
@@ -205,23 +231,21 @@
 
 ## 🚧 Módulos Pendentes
 
-### 1. Cartões de Crédito (0%)
+### 1. Relatórios (0%)
 **Prioridade:** Alta
 
 #### Funcionalidades Planejadas
-- [ ] CRUD de cartões
-- [ ] Associação com bancos
-- [ ] Limite de crédito
-- [ ] Dia de fechamento
-- [ ] Dia de vencimento
-- [ ] Faturas mensais
-- [ ] Despesas parceladas
+- [ ] Gráficos de receitas vs despesas
+- [ ] Gráfico de despesas por categoria
+- [ ] Evolução mensal
+- [ ] Exportação para CSV
+- [ ] Exportação para PDF
+- [ ] Filtros de período
 
-#### Arquivos a Criar
-- `src/types/cartao.ts`
-- `src/services/cartoes.service.ts`
-- `src/components/cartoes/CartaoForm.tsx`
-- `src/pages/cartoes/Cartoes.tsx`
+#### Bibliotecas Sugeridas
+- Chart.js ou Recharts
+- jsPDF para PDF
+- Papa Parse para CSV
 
 ---
 
@@ -310,15 +334,31 @@
 - updated_at (timestamptz) ✅ ADICIONADA
 ```
 
-#### 5. cards (Pendente)
+#### 5. cards ✅
 ```sql
 - id (uuid, PK)
 - user_id (uuid, FK)
 - bank_id (uuid, FK, ON DELETE SET NULL)
 - name (text)
-- limit (numeric)
+- limit_amount (numeric)
 - closing_day (integer)
 - due_day (integer)
+- color (text)
+- created_at (timestamptz)
+```
+
+#### 6. card_expenses ✅
+```sql
+- id (uuid, PK)
+- user_id (uuid, FK)
+- card_id (uuid, FK, ON DELETE CASCADE)
+- value (numeric)
+- category (text)
+- date (date)
+- description (text)
+- installments (integer)
+- installment_current (integer)
+- original_amount (numeric)
 - created_at (timestamptz)
 ```
 
@@ -330,6 +370,8 @@ Todas as tabelas implementadas possuem RLS configurado:
 - ✅ **receitas** - Políticas configuradas
 - ✅ **expenses** - Políticas configuradas
 - ✅ **banks** - Políticas configuradas
+- ✅ **cards** - Políticas configuradas
+- ✅ **card_expenses** - Políticas configuradas
 
 ---
 
@@ -341,6 +383,7 @@ Todas as tabelas implementadas possuem RLS configurado:
 3. ✅ `supabase/add-expenses-columns.sql` - Colunas de expenses
 4. ✅ `supabase/add-expenses-rls.sql` - RLS de expenses
 5. ✅ `supabase/add-balance-column.sql` - Coluna balance em banks
+6. ✅ `SETUP_CARDS.md` - Setup de cartões
 
 ### Pendentes
 - ❌ Nenhum script pendente
@@ -397,8 +440,8 @@ Todas as tabelas implementadas possuem RLS configurado:
 
 ### Imediato (Esta Semana)
 1. ✅ Módulo de Bancos - **CONCLUÍDO**
-2. [ ] Módulo de Cartões de Crédito
-3. [ ] Testes de integração
+2. ✅ Módulo de Cartões de Crédito - **CONCLUÍDO**
+3. [ ] Relatórios básicos
 
 ### Curto Prazo (Próximas 2 Semanas)
 4. [ ] Relatórios básicos
@@ -441,6 +484,7 @@ Todas as tabelas implementadas possuem RLS configurado:
 - ✅ `DESPESAS_README.md` - Módulo de despesas
 - ✅ `IMPLEMENTACAO_DESPESAS.md` - Implementação de despesas
 - ✅ `BUGFIX_RECEITAS.md` - Correções de receitas
+- ✅ `SETUP_CARDS.md` - Setup de cartões
 
 ---
 
@@ -479,7 +523,7 @@ Todas as tabelas implementadas possuem RLS configurado:
 | Receitas | 100% | ✅ Completo |
 | Despesas | 100% | ✅ Completo |
 | Bancos | 100% | ✅ Completo |
-| Cartões | 0% | 🚧 Pendente |
+| Cartões | 100% | ✅ Completo |
 | Relatórios | 0% | 🚧 Pendente |
 | Configurações | 0% | 🚧 Pendente |
 

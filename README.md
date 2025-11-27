@@ -17,12 +17,12 @@
 - ✅ **Receitas** - CRUD completo com filtros e recorrência
 - ✅ **Despesas** - CRUD completo com filtros e recorrência
 - ✅ **Bancos** - CRUD completo com cores e saldos
+- ✅ **Cartões de Crédito** - CRUD, faturas e parcelamento
 - ✅ **Dark Mode** - Tema escuro/claro
 - ✅ **Responsivo** - Mobile, Tablet e Desktop
 
 ### 🚧 Em Desenvolvimento
 
-- 🚧 **Cartões de Crédito** - CRUD e faturas
 - 🚧 **Relatórios** - Gráficos e exportação
 - 🚧 **Configurações** - Perfil e preferências
 
@@ -93,6 +93,9 @@ SETUP_EXPENSES_COMPLETO.md
 
 # 4. Configuração da tabela banks
 SETUP_BANKS.md
+
+# 5. Configuração da tabela cards
+SETUP_CARDS.md
 ```
 
 5. **Inicie o servidor de desenvolvimento**
@@ -113,6 +116,7 @@ http://localhost:5173
 - 📄 [CRIAR_TABELA_RECEITAS.md](CRIAR_TABELA_RECEITAS.md) - Setup da tabela de receitas
 - 📄 [SETUP_EXPENSES_COMPLETO.md](SETUP_EXPENSES_COMPLETO.md) - Setup da tabela de despesas
 - 📄 [SETUP_BANKS.md](SETUP_BANKS.md) - Setup da tabela de bancos
+- 📄 [SETUP_CARDS.md](SETUP_CARDS.md) - Setup da tabela de cartões
 
 ### Documentação Técnica
 - 📄 [FINAL_STATUS.md](FINAL_STATUS.md) - Status detalhado do projeto
@@ -170,6 +174,14 @@ http://localhost:5173
 - ✅ Verificação de cartões associados antes de deletar
 - ✅ Estatísticas de saldo total
 
+### 💳 Cartões de Crédito
+- ✅ Criar, editar, visualizar e deletar cartões
+- ✅ Gestão de limites e datas (fechamento/vencimento)
+- ✅ Lançamento de despesas com parcelamento automático
+- ✅ Visualização de faturas por mês
+- ✅ Navegação entre faturas (anteriores/futuras)
+- ✅ Cálculo de uso do limite
+
 ### 🎨 Interface
 - ✅ Design moderno e responsivo
 - ✅ Dark mode completo
@@ -201,15 +213,18 @@ WalletGuard/
 │   │   ├── bancos/        # Página de bancos
 │   │   ├── dashboard/     # Dashboard
 │   │   ├── despesas/      # Página de despesas
-│   │   └── receitas/      # Página de receitas
+│   │   ├── receitas/      # Página de receitas
+│   │   └── cartoes/       # Páginas de cartões
 │   ├── services/           # Serviços e APIs
 │   │   ├── bancos.service.ts
+│   │   ├── cards.service.ts
 │   │   ├── dashboard.service.ts
 │   │   ├── despesas.service.ts
 │   │   ├── receitas.service.ts
 │   │   └── supabase.ts    # Cliente Supabase
 │   ├── types/              # Tipos TypeScript
 │   │   ├── banco.ts
+│   │   ├── card.ts
 │   │   ├── despesa.ts
 │   │   └── receita.ts
 │   ├── App.tsx             # Componente principal
@@ -239,7 +254,8 @@ Todas as tabelas utilizam RLS do Supabase:
 - ✅ **receitas** - Isolamento por user_id
 - ✅ **expenses** - Isolamento por user_id
 - ✅ **banks** - Isolamento por user_id
-- ✅ **cards** - Isolamento por user_id (futuro)
+- ✅ **cards** - Isolamento por user_id
+- ✅ **card_expenses** - Isolamento por user_id
 
 ### Autenticação
 
@@ -316,10 +332,10 @@ npm run lint         # Verifica código com ESLint
 
 ## 📈 Roadmap
 
-### Versão 1.3 (Próxima)
-- [ ] CRUD de Cartões de Crédito
-- [ ] Faturas de cartão
-- [ ] Parcelamento de despesas
+### Versão 1.3 (Concluída)
+- [x] CRUD de Cartões de Crédito
+- [x] Faturas de cartão
+- [x] Parcelamento de despesas
 
 ### Versão 1.4
 - [ ] Relatórios e gráficos avançados

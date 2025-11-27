@@ -10,7 +10,8 @@ import { ForgotPassword } from './pages/auth/ForgotPassword';
 import { Dashboard } from './pages/dashboard/Dashboard';
 import { Receitas } from './pages/receitas/Receitas';
 import { Despesas } from './pages/despesas/Despesas';
-import { Cards } from './pages/cards/Cards';
+import { Cartoes } from './pages/cartoes/Cartoes';
+import { GastosCartao } from './pages/cartoes/GastosCartao';
 import { Bancos } from './pages/bancos/Bancos';
 import { Reports } from './pages/reports/Reports';
 import { Settings } from './pages/settings/Settings';
@@ -38,7 +39,8 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/receitas" element={<Receitas />} />
               <Route path="/despesas" element={<Despesas />} />
-              <Route path="/cartoes" element={<Cards />} />
+              <Route path="/cartoes" element={<Cartoes />} />
+              <Route path="/cartoes/:id/gastos" element={<GastosCartao />} />
               <Route path="/bancos" element={<Bancos />} />
               <Route path="/relatorios" element={<Reports />} />
               <Route path="/configuracoes" element={<Settings />} />
