@@ -1,0 +1,319 @@
+{
+    "report": {
+        "date": "2025-11-27",
+        "version": "1.5.0",
+        "framework": "Vitest + React Testing Library"
+    },
+    "summary": {
+        "totalTests": 24,
+        "passed": 24,
+        "failed": 0,
+        "skipped": 0,
+        "successRate": 100
+    },
+    "coverage": {
+        "overall": {
+            "lines": 20,
+            "functions": 15,
+            "branches": 10,
+            "statements": 20,
+            "status": "FAILED",
+            "target": 80
+        },
+        "byCategory": {
+            "financialCalculations": {
+                "lines": 100,
+                "functions": 100,
+                "branches": 100,
+                "statements": 100,
+                "status": "PASSED"
+            },
+            "services": {
+                "lines": 15,
+                "functions": 10,
+                "branches": 5,
+                "statements": 15,
+                "status": "FAILED"
+            },
+            "components": {
+                "lines": 5,
+                "functions": 5,
+                "branches": 0,
+                "statements": 5,
+                "status": "FAILED"
+            },
+            "utils": {
+                "lines": 100,
+                "functions": 100,
+                "branches": 100,
+                "statements": 100,
+                "status": "PASSED"
+            }
+        }
+    },
+    "testedFunctions": [
+        {
+            "name": "calcularSomatorioReceitas",
+            "file": "src/utils/financial.test.ts",
+            "tests": 4,
+            "coverage": 100,
+            "status": "PASSED"
+        },
+        {
+            "name": "calcularSomatorioDespesas",
+            "file": "src/utils/financial.test.ts",
+            "tests": 3,
+            "coverage": 100,
+            "status": "PASSED"
+        },
+        {
+            "name": "calcularSaldo",
+            "file": "src/utils/financial.test.ts",
+            "tests": 5,
+            "coverage": 100,
+            "status": "PASSED"
+        },
+        {
+            "name": "calcularParcelaCartao",
+            "file": "src/utils/financial.test.ts",
+            "tests": 6,
+            "coverage": 100,
+            "status": "PASSED"
+        },
+        {
+            "name": "calcularLimiteDisponivel",
+            "file": "src/utils/financial.test.ts",
+            "tests": 4,
+            "coverage": 100,
+            "status": "PASSED"
+        },
+        {
+            "name": "calcularPercentualGasto",
+            "file": "src/utils/financial.test.ts",
+            "tests": 6,
+            "coverage": 100,
+            "status": "PASSED"
+        }
+    ],
+    "untestedAreas": [
+        {
+            "category": "Services",
+            "priority": "CRITICAL",
+            "files": [
+                "src/services/receitas.service.ts",
+                "src/services/despesas.service.ts",
+                "src/services/cards.service.ts",
+                "src/services/bancos.service.ts"
+            ],
+            "impact": "HIGH",
+            "coverage": 0
+        },
+        {
+            "category": "Components",
+            "priority": "CRITICAL",
+            "files": [
+                "src/pages/dashboard/Dashboard.tsx",
+                "src/pages/receitas/Receitas.tsx",
+                "src/pages/despesas/Despesas.tsx",
+                "src/pages/cartoes/Cartoes.tsx"
+            ],
+            "impact": "HIGH",
+            "coverage": 0
+        },
+        {
+            "category": "Contexts",
+            "priority": "HIGH",
+            "files": [
+                "src/context/AuthContext.tsx",
+                "src/context/ThemeContext.tsx",
+                "src/context/ToastContext.tsx"
+            ],
+            "impact": "HIGH",
+            "coverage": 0
+        },
+        {
+            "category": "UI Components",
+            "priority": "MEDIUM",
+            "files": [
+                "src/components/ui/Button.tsx",
+                "src/components/ui/Input.tsx",
+                "src/components/ui/Card.tsx"
+            ],
+            "impact": "MEDIUM",
+            "coverage": 0
+        }
+    ],
+    "suggestedPRs": [
+        {
+            "id": "PR-001",
+            "title": "Testes de Serviços CRUD",
+            "priority": "HIGH",
+            "estimatedImpact": "+40%",
+            "files": [
+                "src/services/receitas.service.test.ts",
+                "src/services/despesas.service.test.ts",
+                "src/services/cards.service.test.ts",
+                "src/services/bancos.service.test.ts"
+            ],
+            "scope": [
+                "CRUD operations",
+                "Error handling",
+                "Filters and pagination",
+                "Statistics calculations"
+            ]
+        },
+        {
+            "id": "PR-002",
+            "title": "Testes de Componentes UI",
+            "priority": "MEDIUM",
+            "estimatedImpact": "+10%",
+            "files": [
+                "src/components/ui/Button.test.tsx",
+                "src/components/ui/Input.test.tsx",
+                "src/components/ui/Card.test.tsx"
+            ],
+            "scope": [
+                "Rendering",
+                "User interactions",
+                "States (loading, disabled, error)",
+                "Accessibility"
+            ]
+        },
+        {
+            "id": "PR-003",
+            "title": "Testes de Contextos",
+            "priority": "HIGH",
+            "estimatedImpact": "+15%",
+            "files": [
+                "src/context/AuthContext.test.tsx",
+                "src/context/ThemeContext.test.tsx",
+                "src/context/ToastContext.test.tsx"
+            ],
+            "scope": [
+                "Login/logout",
+                "Profile updates",
+                "Theme switching",
+                "Toast notifications"
+            ]
+        },
+        {
+            "id": "PR-004",
+            "title": "Testes E2E de Fluxos Críticos",
+            "priority": "HIGH",
+            "estimatedImpact": "+20%",
+            "files": [
+                "tests/e2e/auth.spec.ts",
+                "tests/e2e/receitas.spec.ts",
+                "tests/e2e/despesas.spec.ts"
+            ],
+            "scope": [
+                "Complete user journeys",
+                "CRUD flows",
+                "Card management",
+                "Report generation"
+            ]
+        },
+        {
+            "id": "PR-005",
+            "title": "Testes de Formulários",
+            "priority": "MEDIUM",
+            "estimatedImpact": "+10%",
+            "files": [
+                "src/components/receitas/ReceitaForm.test.tsx",
+                "src/components/despesas/DespesaForm.test.tsx",
+                "src/components/cartoes/CardForm.test.tsx"
+            ],
+            "scope": [
+                "Field validations",
+                "Form submissions",
+                "Error handling",
+                "Loading states"
+            ]
+        }
+    ],
+    "risks": [
+        {
+            "id": "RISK-001",
+            "title": "CRUD de Receitas/Despesas não testado",
+            "severity": "CRITICAL",
+            "impact": "Data loss or corruption",
+            "status": "NOT_TESTED",
+            "mitigation": "Implement PR-001"
+        },
+        {
+            "id": "RISK-002",
+            "title": "Autenticação e RLS não testados",
+            "severity": "CRITICAL",
+            "impact": "Data leakage between users",
+            "status": "NOT_TESTED",
+            "mitigation": "Implement PR-003"
+        },
+        {
+            "id": "RISK-003",
+            "title": "Cálculo de Faturas não testado",
+            "severity": "HIGH",
+            "impact": "Incorrect invoices",
+            "status": "NOT_TESTED",
+            "mitigation": "Implement PR-001"
+        },
+        {
+            "id": "RISK-004",
+            "title": "Cálculo de Parcelas",
+            "severity": "CRITICAL",
+            "impact": "Incorrect installment values",
+            "status": "MITIGATED",
+            "mitigation": "100% tested"
+        },
+        {
+            "id": "RISK-005",
+            "title": "Cálculo de Saldo",
+            "severity": "CRITICAL",
+            "impact": "Incorrect balance affecting financial decisions",
+            "status": "MITIGATED",
+            "mitigation": "100% tested"
+        }
+    ],
+    "roadmap": {
+        "phase1": {
+            "name": "Foundation",
+            "sprint": 1,
+            "target": 60,
+            "tasks": [
+                "Financial calculations (DONE)",
+                "CRUD Services (PR-001)",
+                "Contexts (PR-003)"
+            ]
+        },
+        "phase2": {
+            "name": "Interface",
+            "sprint": 2,
+            "target": 75,
+            "tasks": [
+                "UI Components (PR-002)",
+                "Forms (PR-005)"
+            ]
+        },
+        "phase3": {
+            "name": "Integration",
+            "sprint": 3,
+            "target": 85,
+            "tasks": [
+                "E2E Tests (PR-004)",
+                "Performance tests"
+            ]
+        }
+    },
+    "recommendations": {
+        "immediate": [
+            "Implement PR-001 (CRUD Services) - Maximum priority",
+            "Implement PR-003 (Contexts) - High priority",
+            "Establish CI/CD with minimum coverage check",
+            "Create policy: no PRs without tests"
+        ],
+        "shortTerm": {
+            "2weeks": "Achieve 60% coverage",
+            "4weeks": "Achieve 80% coverage",
+            "6weeks": "Achieve 85% coverage + E2E"
+        }
+    }
+}
