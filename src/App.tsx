@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { ToastProvider } from './context/ToastContext';
 import { RequireAuth } from './components/auth/RequireAuth';
 import { AuthLayout } from './layouts/AuthLayout';
 import { AppLayout } from './layouts/AppLayout';
@@ -20,36 +21,38 @@ function App() {
   return (
     <AuthProvider>
       <ThemeProvider>
-        <Router>
-          <Routes>
-            {/* Auth Routes */}
-            <Route element={<AuthLayout />}>
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-            </Route>
+        <ToastProvider>
+          <Router>
+            <Routes>
+              {/* Auth Routes */}
+              <Route element={<AuthLayout />}>
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+              </Route>
 
-            {/* App Routes */}
-            <Route element={
-              <RequireAuth>
-                <AppLayout />
-              </RequireAuth>
-            }>
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/receitas" element={<Receitas />} />
-              <Route path="/despesas" element={<Despesas />} />
-              <Route path="/cartoes" element={<Cartoes />} />
-              <Route path="/cartoes/:id/gastos" element={<GastosCartao />} />
-              <Route path="/bancos" element={<Bancos />} />
-              <Route path="/relatorios" element={<Relatorios />} />
-              <Route path="/configuracoes" element={<Settings />} />
-            </Route>
+              {/* App Routes */}
+              <Route element={
+                <RequireAuth>
+                  <AppLayout />
+                </RequireAuth>
+              }>
+                <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/receitas" element={<Receitas />} />
+                <Route path="/despesas" element={<Despesas />} />
+                <Route path="/cartoes" element={<Cartoes />} />
+                <Route path="/cartoes/:id/gastos" element={<GastosCartao />} />
+                <Route path="/bancos" element={<Bancos />} />
+                <Route path="/relatorios" element={<Relatorios />} />
+                <Route path="/configuracoes" element={<Settings />} />
+              </Route>
 
-            {/* Fallback */}
-            <Route path="*" element={<Navigate to="/dashboard" replace />} />
-          </Routes>
-        </Router>
+              {/* Fallback */}
+              <Route path="*" element={<Navigate to="/dashboard" replace />} />
+            </Routes>
+          </Router>
+        </ToastProvider>
       </ThemeProvider>
     </AuthProvider>
   );

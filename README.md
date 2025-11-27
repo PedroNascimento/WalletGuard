@@ -19,12 +19,14 @@
 - ✅ **Bancos** - CRUD completo com cores e saldos
 - ✅ **Cartões de Crédito** - CRUD, faturas e parcelamento
 - ✅ **Relatórios** - Gráficos, previsões e exportação PDF
+- ✅ **Configurações** - Perfil, segurança e backup
 - ✅ **Dark Mode** - Tema escuro/claro
 - ✅ **Responsivo** - Mobile, Tablet e Desktop
 
-### 🚧 Em Desenvolvimento
+### 🚀 Próximos Passos (v2.0)
 
-- 🚧 **Configurações** - Perfil e preferências
+- 🚧 **Metas Financeiras**
+- 🚧 **Orçamentos**
 
 ---
 
@@ -190,6 +192,12 @@ http://localhost:5173
 - ✅ Filtros por período e categoria
 - ✅ Tabela de previsão de gastos futuros
 - ✅ Exportação completa em PDF
+
+### ⚙️ Configurações
+- ✅ Edição de perfil
+- ✅ Alteração de senha
+- ✅ Controle de tema (Dark/Light)
+- ✅ Exportação de dados (Backup JSON)
 
 ### 🎨 Interface
 - ✅ Design moderno e responsivo

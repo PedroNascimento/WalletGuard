@@ -10,6 +10,7 @@ interface AuthContextType {
     signUp: (email: string, password: string, name: string) => Promise<{ error: any }>;
     signOut: () => Promise<{ error: any }>;
     resetPassword: (email: string) => Promise<{ error: any }>;
+    refreshUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -20,6 +21,7 @@ const AuthContext = createContext<AuthContextType>({
     signUp: async () => ({ error: null }),
     signOut: async () => ({ error: null }),
     resetPassword: async () => ({ error: null }),
+    refreshUser: async () => { },
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -180,8 +182,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return { error };
     };
 
+    const refreshUser = async () => {
+        const { data: { session } } = await supabase.auth.getSession();
+        setSession(session);
+        setUser(session?.user ?? null);
+    };
+
     return (
-        <AuthContext.Provider value={{ user, session, loading, signIn, signUp, signOut, resetPassword }}>
+        <AuthContext.Provider value={{ user, session, loading, signIn, signUp, signOut, resetPassword, refreshUser }}>
             {!loading && children}
         </AuthContext.Provider>
     );
