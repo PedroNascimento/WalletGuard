@@ -199,10 +199,18 @@ export const despesasService = {
 
     // Deletar despesa
     async delete(id: string) {
-        const { error } = await supabase
+        const { error, count } = await supabase
             .from('expenses')
-            .delete()
+            .delete({ count: 'exact' })
             .eq('id', id);
+
+        if (error) {
+            throw error;
+        }
+
+        if (count === 0) {
+            throw new Error('Erro ao excluir: Registro não encontrado ou sem permissão.');
+        }
 
         if (error) {
             throw error;

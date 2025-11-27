@@ -6,6 +6,7 @@ import { DespesaForm } from '../../components/despesas/DespesaForm';
 import { DespesaFiltersComponent } from '../../components/despesas/DespesaFilters';
 import { despesasService } from '../../services/despesas.service';
 import type { Despesa, DespesaFormData, DespesaFilters } from '../../types/despesa';
+import { ConfirmModal } from '../../components/ui/ConfirmModal';
 
 export const Despesas: React.FC = () => {
     const [despesas, setDespesas] = useState<Despesa[]>([]);
@@ -23,6 +24,13 @@ export const Despesas: React.FC = () => {
         recorrentes: 0,
         quantidade: 0
     });
+
+    // Estado para confirmação de exclusão
+    const [deleteConfirmation, setDeleteConfirmation] = useState<{ isOpen: boolean; id: string | null }>({
+        isOpen: false,
+        id: null
+    });
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const pageSize = 10;
 
@@ -85,18 +93,27 @@ export const Despesas: React.FC = () => {
         }
     };
 
-    const handleDelete = async (id: string) => {
-        if (!confirm('Tem certeza que deseja excluir esta despesa?')) {
-            return;
-        }
+    const handleDeleteClick = (id: string) => {
+        setDeleteConfirmation({ isOpen: true, id });
+    };
+
+    const handleConfirmDelete = async () => {
+        if (!deleteConfirmation.id) return;
 
         try {
-            await despesasService.delete(id);
+            setIsDeleting(true);
+            console.log('Excluindo despesa:', deleteConfirmation.id);
+            await despesasService.delete(deleteConfirmation.id);
+            console.log('Despesa excluída com sucesso');
+
+            setDeleteConfirmation({ isOpen: false, id: null });
             loadDespesas();
             loadStats();
-        } catch (error) {
+        } catch (error: any) {
             console.error('Erro ao excluir despesa:', error);
-            alert('Erro ao excluir despesa. Tente novamente.');
+            alert(`Erro ao excluir: ${error.message || 'Erro desconhecido'}`);
+        } finally {
+            setIsDeleting(false);
         }
     };
 
@@ -272,8 +289,8 @@ export const Despesas: React.FC = () => {
                                             </td>
                                             <td className="px-6 py-4">
                                                 <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${despesa.tipo === 'fixa'
-                                                        ? 'bg-orange-100 dark:bg-orange-900/20 text-orange-800 dark:text-orange-300'
-                                                        : 'bg-purple-100 dark:bg-purple-900/20 text-purple-800 dark:text-purple-300'
+                                                    ? 'bg-orange-100 dark:bg-orange-900/20 text-orange-800 dark:text-orange-300'
+                                                    : 'bg-purple-100 dark:bg-purple-900/20 text-purple-800 dark:text-purple-300'
                                                     }`}>
                                                     {despesa.tipo === 'fixa' ? 'Fixa' : 'Variável'}
                                                 </span>
@@ -308,7 +325,7 @@ export const Despesas: React.FC = () => {
                                                         <Edit2 size={16} className="text-gray-600 dark:text-gray-400" />
                                                     </button>
                                                     <button
-                                                        onClick={() => handleDelete(despesa.id)}
+                                                        onClick={() => handleDeleteClick(despesa.id)}
                                                         className="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
                                                         title="Excluir"
                                                     >
@@ -358,6 +375,16 @@ export const Despesas: React.FC = () => {
                     onCancel={handleCloseForm}
                 />
             )}
+
+            {/* Delete Confirmation Modal */}
+            <ConfirmModal
+                isOpen={deleteConfirmation.isOpen}
+                onClose={() => setDeleteConfirmation({ isOpen: false, id: null })}
+                onConfirm={handleConfirmDelete}
+                title="Excluir Despesa"
+                message="Tem certeza que deseja excluir esta despesa? Esta ação não pode ser desfeita."
+                isLoading={isDeleting}
+            />
         </div>
     );
 };

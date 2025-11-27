@@ -6,6 +6,7 @@ import { ReceitaForm } from '../../components/receitas/ReceitaForm';
 import { ReceitaFiltersComponent } from '../../components/receitas/ReceitaFilters';
 import { receitasService } from '../../services/receitas.service';
 import type { Receita, ReceitaFormData, ReceitaFilters } from '../../types/receita';
+import { ConfirmModal } from '../../components/ui/ConfirmModal';
 
 export const Receitas: React.FC = () => {
     const [receitas, setReceitas] = useState<Receita[]>([]);
@@ -21,6 +22,13 @@ export const Receitas: React.FC = () => {
         recorrentes: 0,
         quantidade: 0
     });
+
+    // Estado para confirmação de exclusão
+    const [deleteConfirmation, setDeleteConfirmation] = useState<{ isOpen: boolean; id: string | null }>({
+        isOpen: false,
+        id: null
+    });
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const pageSize = 10;
 
@@ -38,7 +46,7 @@ export const Receitas: React.FC = () => {
             setTotalCount(result.count);
         } catch (error) {
             console.error('Erro ao carregar receitas:', error);
-            alert('Erro ao carregar receitas. Verifique sua conexão.');
+            // alert('Erro ao carregar receitas. Verifique sua conexão.');
         } finally {
             setLoading(false);
         }
@@ -83,18 +91,27 @@ export const Receitas: React.FC = () => {
         }
     };
 
-    const handleDelete = async (id: string) => {
-        if (!confirm('Tem certeza que deseja excluir esta receita?')) {
-            return;
-        }
+    const handleDeleteClick = (id: string) => {
+        setDeleteConfirmation({ isOpen: true, id });
+    };
+
+    const handleConfirmDelete = async () => {
+        if (!deleteConfirmation.id) return;
 
         try {
-            await receitasService.delete(id);
+            setIsDeleting(true);
+            console.log('Excluindo receita:', deleteConfirmation.id);
+            await receitasService.delete(deleteConfirmation.id);
+            console.log('Receita excluída com sucesso');
+
+            setDeleteConfirmation({ isOpen: false, id: null });
             loadReceitas();
             loadStats();
-        } catch (error) {
+        } catch (error: any) {
             console.error('Erro ao excluir receita:', error);
-            alert('Erro ao excluir receita. Tente novamente.');
+            alert(`Erro ao excluir: ${error.message || 'Erro desconhecido'}`);
+        } finally {
+            setIsDeleting(false);
         }
     };
 
@@ -157,12 +174,12 @@ export const Receitas: React.FC = () => {
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-sm text-gray-600 dark:text-gray-400">Receitas Recorrentes</p>
-                            <p className="text-2xl font-bold text-primary-600 dark:text-primary-400 mt-1">
+                            <p className="text-2xl font-bold text-blue-600 dark:text-blue-400 mt-1">
                                 {stats.recorrentes}
                             </p>
                         </div>
-                        <div className="p-3 bg-primary-100 dark:bg-primary-900/20 rounded-lg">
-                            <Repeat size={24} className="text-primary-600 dark:text-primary-400" />
+                        <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
+                            <Repeat size={24} className="text-blue-600 dark:text-blue-400" />
                         </div>
                     </div>
                 </Card>
@@ -175,7 +192,7 @@ export const Receitas: React.FC = () => {
                                 {stats.quantidade}
                             </p>
                         </div>
-                        <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                        <div className="p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
                             <RefreshCw size={24} className="text-gray-600 dark:text-gray-400" />
                         </div>
                     </div>
@@ -187,7 +204,7 @@ export const Receitas: React.FC = () => {
                 filters={filters}
                 onFiltersChange={(newFilters) => {
                     setFilters(newFilters);
-                    setPage(1); // Reset to first page when filters change
+                    setPage(1);
                 }}
             />
 
@@ -281,7 +298,7 @@ export const Receitas: React.FC = () => {
                                                         <Edit2 size={16} className="text-gray-600 dark:text-gray-400" />
                                                     </button>
                                                     <button
-                                                        onClick={() => handleDelete(receita.id)}
+                                                        onClick={() => handleDeleteClick(receita.id)}
                                                         className="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
                                                         title="Excluir"
                                                     >
@@ -331,6 +348,16 @@ export const Receitas: React.FC = () => {
                     onCancel={handleCloseForm}
                 />
             )}
+
+            {/* Delete Confirmation Modal */}
+            <ConfirmModal
+                isOpen={deleteConfirmation.isOpen}
+                onClose={() => setDeleteConfirmation({ isOpen: false, id: null })}
+                onConfirm={handleConfirmDelete}
+                title="Excluir Receita"
+                message="Tem certeza que deseja excluir esta receita? Esta ação não pode ser desfeita."
+                isLoading={isDeleting}
+            />
         </div>
     );
 };

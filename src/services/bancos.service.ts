@@ -157,20 +157,20 @@ export const bancosService = {
 
     // Deletar banco
     async delete(id: string) {
-        // Verificar se tem cartões associados
-        const { hasCards, count } = await this.hasCards(id);
+        // A verificação de cartões é feita no frontend para confirmação do usuário.
+        // O banco de dados está configurado com ON DELETE SET NULL, então a integridade é mantida.
 
-        if (hasCards) {
-            throw new Error(`Este banco possui ${count} cartão(ões) associado(s). Os cartões serão desvinculados ao deletar o banco.`);
-        }
-
-        const { error } = await supabase
+        const { error, count } = await supabase
             .from('banks')
-            .delete()
+            .delete({ count: 'exact' })
             .eq('id', id);
 
         if (error) {
             throw error;
+        }
+
+        if (count === 0) {
+            throw new Error('Erro ao excluir: Registro não encontrado ou sem permissão.');
         }
 
         return true;

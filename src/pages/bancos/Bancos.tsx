@@ -6,6 +6,7 @@ import { BancoForm } from '../../components/bancos/BancoForm';
 import { bancosService } from '../../services/bancos.service';
 import type { Banco, BancoFormData, BancoFilters } from '../../types/banco';
 import { TIPOS_BANCO } from '../../types/banco';
+import { ConfirmModal } from '../../components/ui/ConfirmModal';
 
 export const Bancos: React.FC = () => {
     const [bancos, setBancos] = useState<Banco[]>([]);
@@ -20,6 +21,18 @@ export const Bancos: React.FC = () => {
         investimento: 0,
         quantidade: 0
     });
+
+    // Estado para confirmação de exclusão
+    const [deleteConfirmation, setDeleteConfirmation] = useState<{
+        isOpen: boolean;
+        banco: Banco | null;
+        message: string;
+    }>({
+        isOpen: false,
+        banco: null,
+        message: ''
+    });
+    const [isDeleting, setIsDeleting] = useState(false);
 
     useEffect(() => {
         loadBancos();
@@ -75,29 +88,51 @@ export const Bancos: React.FC = () => {
         }
     };
 
-    const handleDelete = async (banco: Banco) => {
+    const handleDeleteClick = async (banco: Banco) => {
         try {
-            // Verificar se tem cartões associados
+            // Verificar se tem cartões associados antes de abrir o modal
+            console.log('Verificando cartões para banco:', banco.id);
             const { hasCards, count } = await bancosService.hasCards(banco.id);
 
-            if (hasCards) {
-                const confirmMessage = `Este banco possui ${count} cartão(ões) associado(s).\n\nAo deletar o banco, os cartões serão desvinculados (bank_id será NULL).\n\nDeseja continuar?`;
+            let message = `Tem certeza que deseja excluir o banco "${banco.name}"?`;
 
-                if (!confirm(confirmMessage)) {
-                    return;
-                }
-            } else {
-                if (!confirm(`Tem certeza que deseja excluir o banco "${banco.name}"?`)) {
-                    return;
-                }
+            if (hasCards) {
+                message = `Este banco possui ${count} cartão(ões) associado(s).\n\nAo deletar o banco, os cartões serão desvinculados (bank_id será NULL).\n\nDeseja continuar?`;
             }
 
-            await bancosService.delete(banco.id);
+            setDeleteConfirmation({
+                isOpen: true,
+                banco,
+                message
+            });
+        } catch (error) {
+            console.error('Erro ao verificar cartões:', error);
+            // Fallback em caso de erro na verificação
+            setDeleteConfirmation({
+                isOpen: true,
+                banco,
+                message: `Tem certeza que deseja excluir o banco "${banco.name}"?`
+            });
+        }
+    };
+
+    const handleConfirmDelete = async () => {
+        if (!deleteConfirmation.banco) return;
+
+        try {
+            setIsDeleting(true);
+            console.log('Excluindo banco:', deleteConfirmation.banco.id);
+            await bancosService.delete(deleteConfirmation.banco.id);
+            console.log('Banco excluído com sucesso');
+
+            setDeleteConfirmation({ isOpen: false, banco: null, message: '' });
             loadBancos();
             loadStats();
         } catch (error: any) {
             console.error('Erro ao excluir banco:', error);
-            alert(error.message || 'Erro ao excluir banco. Tente novamente.');
+            alert(`Erro ao excluir: ${error.message || 'Erro desconhecido'}`);
+        } finally {
+            setIsDeleting(false);
         }
     };
 
@@ -291,7 +326,7 @@ export const Bancos: React.FC = () => {
                                     </Button>
                                     <Button
                                         variant="outline"
-                                        onClick={() => handleDelete(banco)}
+                                        onClick={() => handleDeleteClick(banco)}
                                         className="gap-2 text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20"
                                     >
                                         <Trash2 size={16} />
@@ -312,6 +347,16 @@ export const Bancos: React.FC = () => {
                     onCancel={handleCloseForm}
                 />
             )}
+
+            {/* Delete Confirmation Modal */}
+            <ConfirmModal
+                isOpen={deleteConfirmation.isOpen}
+                onClose={() => setDeleteConfirmation({ isOpen: false, banco: null, message: '' })}
+                onConfirm={handleConfirmDelete}
+                title="Excluir Banco"
+                message={deleteConfirmation.message}
+                isLoading={isDeleting}
+            />
         </div>
     );
 };
