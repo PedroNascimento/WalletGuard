@@ -8,6 +8,16 @@ export default defineConfig({
         globals: true,
         environment: 'jsdom',
         setupFiles: './src/test/setup.ts',
+        testTimeout: 10000, // 10 seconds timeout per test
+        hookTimeout: 10000, // 10 seconds timeout for hooks
+        teardownTimeout: 10000,
+        isolate: true,
+        pool: 'forks', // Use forks instead of threads for better isolation
+        poolOptions: {
+            forks: {
+                singleFork: false,
+            },
+        },
         coverage: {
             provider: 'v8',
             reporter: ['text', 'html', 'lcov', 'json'],

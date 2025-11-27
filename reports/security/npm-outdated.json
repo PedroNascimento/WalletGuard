@@ -1,0 +1,58 @@
+{
+  "@supabase/supabase-js": {
+    "current": "2.84.0",
+    "wanted": "2.86.0",
+    "latest": "2.86.0",
+    "dependent": "WalletGuard",
+    "location": "C:\\Users\\Pedro\\Desktop\\micro-saas\\WalletGuard\\node_modules\\@supabase\\supabase-js"
+  },
+  "@types/react": {
+    "current": "19.2.6",
+    "wanted": "19.2.7",
+    "latest": "19.2.7",
+    "dependent": "WalletGuard",
+    "location": "C:\\Users\\Pedro\\Desktop\\micro-saas\\WalletGuard\\node_modules\\@types\\react"
+  },
+  "@vitejs/plugin-react": {
+    "current": "5.1.1",
+    "wanted": "5.1.1",
+    "latest": "4.7.0",
+    "dependent": "WalletGuard",
+    "location": "C:\\Users\\Pedro\\Desktop\\micro-saas\\WalletGuard\\node_modules\\@vitejs\\plugin-react"
+  },
+  "lucide-react": {
+    "current": "0.554.0",
+    "wanted": "0.554.0",
+    "latest": "0.555.0",
+    "dependent": "WalletGuard",
+    "location": "C:\\Users\\Pedro\\Desktop\\micro-saas\\WalletGuard\\node_modules\\lucide-react"
+  },
+  "recharts": {
+    "current": "3.4.1",
+    "wanted": "3.5.0",
+    "latest": "3.5.0",
+    "dependent": "WalletGuard",
+    "location": "C:\\Users\\Pedro\\Desktop\\micro-saas\\WalletGuard\\node_modules\\recharts"
+  },
+  "typescript-eslint": {
+    "current": "8.47.0",
+    "wanted": "8.48.0",
+    "latest": "8.48.0",
+    "dependent": "WalletGuard",
+    "location": "C:\\Users\\Pedro\\Desktop\\micro-saas\\WalletGuard\\node_modules\\typescript-eslint"
+  },
+  "vite": {
+    "current": "7.2.4",
+    "wanted": "7.2.4",
+    "latest": "6.4.1",
+    "dependent": "WalletGuard",
+    "location": "C:\\Users\\Pedro\\Desktop\\micro-saas\\WalletGuard\\node_modules\\vite"
+  },
+  "vite-plugin-pwa": {
+    "current": "1.1.0",
+    "wanted": "1.2.0",
+    "latest": "1.2.0",
+    "dependent": "WalletGuard",
+    "location": "C:\\Users\\Pedro\\Desktop\\micro-saas\\WalletGuard\\node_modules\\vite-plugin-pwa"
+  }
+}
