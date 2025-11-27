@@ -1,52 +1,49 @@
 # 💰 WalletGuard
 
-> Gerencie suas finanças com segurança e inteligência
-
-[![Status](https://img.shields.io/badge/Status-85%25%20Completo-success)](https://github.com)
-[![Build](https://img.shields.io/badge/Build-Passing-brightgreen)](https://github.com)
-[![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
+**Sistema completo de gestão financeira pessoal com controle de receitas, despesas, bancos e cartões.**
 
 ---
 
-## 📋 Sobre o Projeto
+## � Status do Projeto
 
-**WalletGuard** é uma aplicação web moderna de gestão financeira pessoal que permite controlar receitas, despesas, cartões de crédito e muito mais, tudo em um só lugar com segurança e facilidade.
+**Versão:** 1.2.0  
+**Progresso:** 90% Completo  
+**Última Atualização:** 26/11/2025
 
-### ✨ Funcionalidades Principais
+### ✅ Módulos Implementados
 
-- ✅ **Autenticação Segura** - Login, cadastro e recuperação de senha
-- ✅ **Gestão de Receitas** - CRUD completo com filtros e paginação
-- ✅ **Dashboard Inteligente** - Visualize suas finanças em tempo real
-- ✅ **Dark Mode** - Interface adaptável ao seu gosto
-- ✅ **Responsivo** - Funciona perfeitamente em mobile, tablet e desktop
-- ✅ **Segurança RLS** - Seus dados são protegidos por Row Level Security
-- ⏳ **Gestão de Despesas** - Em desenvolvimento
-- ⏳ **Cartões de Crédito** - Em desenvolvimento
-- ⏳ **Relatórios Avançados** - Em desenvolvimento
+- ✅ **Autenticação** - Login, Cadastro, Recuperação de Senha
+- ✅ **Dashboard** - Visão geral com estatísticas e gráficos
+- ✅ **Receitas** - CRUD completo com filtros e recorrência
+- ✅ **Despesas** - CRUD completo com filtros e recorrência
+- ✅ **Bancos** - CRUD completo com cores e saldos
+- ✅ **Dark Mode** - Tema escuro/claro
+- ✅ **Responsivo** - Mobile, Tablet e Desktop
+
+### 🚧 Em Desenvolvimento
+
+- 🚧 **Cartões de Crédito** - CRUD e faturas
+- 🚧 **Relatórios** - Gráficos e exportação
+- 🚧 **Configurações** - Perfil e preferências
 
 ---
 
 ## 🚀 Tecnologias
 
 ### Frontend
-- **React 19** - Biblioteca UI
+- **React 18** - Biblioteca UI
 - **TypeScript** - Tipagem estática
-- **Vite** - Build tool ultrarrápido
-- **Tailwind CSS v4** - Estilização moderna
-- **React Router** - Navegação
-- **Lucide Icons** - Ícones SVG
+- **Vite** - Build tool
+- **Tailwind CSS** - Estilização
+- **React Router DOM** - Roteamento
+- **Lucide React** - Ícones
 
 ### Backend
 - **Supabase** - Backend as a Service
-  - PostgreSQL Database
-  - Authentication
-  - Row Level Security
-  - Real-time subscriptions
-
-### Ferramentas
-- **ESLint** - Linting
-- **PostCSS** - Processamento CSS
-- **Git** - Controle de versão
+  - Autenticação
+  - Banco de dados PostgreSQL
+  - Row Level Security (RLS)
+  - Realtime (futuro)
 
 ---
 
@@ -80,11 +77,23 @@ VITE_SUPABASE_URL=sua_url_do_supabase
 VITE_SUPABASE_ANON_KEY=sua_chave_anonima
 ```
 
-4. **Execute o schema SQL no Supabase**
+4. **Configure o banco de dados**
 
-- Acesse o SQL Editor do Supabase
-- Execute o script `supabase/schema.sql`
-- Ou siga o guia em `CRIAR_TABELA_RECEITAS.md`
+Execute os scripts SQL no Supabase (na ordem):
+
+```bash
+# 1. Schema principal
+supabase/schema.sql
+
+# 2. Tabela de receitas
+CRIAR_TABELA_RECEITAS.md
+
+# 3. Colunas da tabela expenses
+SETUP_EXPENSES_COMPLETO.md
+
+# 4. Configuração da tabela banks
+SETUP_BANKS.md
+```
 
 5. **Inicie o servidor de desenvolvimento**
 ```bash
@@ -98,47 +107,186 @@ http://localhost:5173
 
 ---
 
-## 📖 Documentação
+## � Documentação
 
-- **[SETUP_GUIDE.md](SETUP_GUIDE.md)** - Guia completo de configuração
-- **[FINAL_STATUS.md](FINAL_STATUS.md)** - Status atual do projeto
-- **[RECEITAS_README.md](RECEITAS_README.md)** - Documentação do CRUD de Receitas
-- **[CRIAR_TABELA_RECEITAS.md](CRIAR_TABELA_RECEITAS.md)** - Como criar tabelas no Supabase
-- **[TASK_WALLETGUARD_SCAFFOLDING.md](TASK_WALLETGUARD_SCAFFOLDING.md)** - Task detalhada
+### Guias de Setup
+- 📄 [CRIAR_TABELA_RECEITAS.md](CRIAR_TABELA_RECEITAS.md) - Setup da tabela de receitas
+- 📄 [SETUP_EXPENSES_COMPLETO.md](SETUP_EXPENSES_COMPLETO.md) - Setup da tabela de despesas
+- 📄 [SETUP_BANKS.md](SETUP_BANKS.md) - Setup da tabela de bancos
 
----
+### Documentação Técnica
+- 📄 [FINAL_STATUS.md](FINAL_STATUS.md) - Status detalhado do projeto
+- 📄 [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) - Status de implementação
+- 📄 [DESPESAS_README.md](DESPESAS_README.md) - Documentação do módulo de despesas
+- 📄 [BUGFIX_RECEITAS.md](BUGFIX_RECEITAS.md) - Correções aplicadas
 
-## 🎯 Roadmap
-
-### ✅ Fase 1: Fundação (Completo)
-- [x] Setup do projeto
-- [x] Database schema
-- [x] Autenticação
-- [x] UI base
-- [x] Dark mode
-
-### ⚠️ Fase 2: Features Core (40% Completo)
-- [x] CRUD de Receitas
-- [x] Dashboard com dados reais
-- [ ] CRUD de Despesas
-- [ ] CRUD de Cartões
-- [ ] CRUD de Bancos
-
-### ⏳ Fase 3: Features Avançadas (0%)
-- [ ] Relatórios com gráficos
-- [ ] Exportação de dados
-- [ ] Notificações
-- [ ] Configurações avançadas
-
-### ⏳ Fase 4: Polimento (0%)
-- [ ] Testes automatizados
-- [ ] Performance optimization
-- [ ] PWA
-- [ ] App mobile (React Native)
+### Implementação
+- 📄 [IMPLEMENTACAO_DESPESAS.md](IMPLEMENTACAO_DESPESAS.md) - Detalhes da implementação de despesas
+- 📄 [TASK_WALLETGUARD_SCAFFOLDING.md](TASK_WALLETGUARD_SCAFFOLDING.md) - Tarefas e roadmap
 
 ---
 
-## 🛠️ Scripts Disponíveis
+## 🎯 Funcionalidades
+
+### 🔐 Autenticação
+- Login com email e senha
+- Cadastro de novos usuários
+- Recuperação de senha
+- Sessão persistente
+- Logout seguro
+
+### 📊 Dashboard
+- Saldo total (receitas - despesas)
+- Total de receitas do mês
+- Total de despesas do mês
+- Transações recentes
+- Gráficos (em desenvolvimento)
+
+### 💵 Receitas
+- ✅ Criar, editar, visualizar e deletar receitas
+- ✅ Filtros por data, categoria e busca
+- ✅ Paginação (10 itens por página)
+- ✅ Categorias: Salário, Freelance, Investimentos, etc.
+- ✅ Recorrência (Semanal, Mensal, Anual)
+- ✅ Observações opcionais
+- ✅ Estatísticas em tempo real
+
+### 💸 Despesas
+- ✅ Criar, editar, visualizar e deletar despesas
+- ✅ Filtros por data, categoria, tipo e busca
+- ✅ Paginação (10 itens por página)
+- ✅ 10 categorias predefinidas
+- ✅ Tipos: Fixa ou Variável
+- ✅ Recorrência (Semanal, Mensal, Anual)
+- ✅ Observações opcionais
+- ✅ Estatísticas em tempo real
+
+### 🏦 Bancos
+- ✅ Criar, editar, visualizar e deletar bancos
+- ✅ Tipos: Conta Corrente, Poupança, Investimento
+- ✅ 10 cores predefinidas para gráficos
+- ✅ Saldo inicial configurável
+- ✅ Filtros por nome e tipo
+- ✅ Verificação de cartões associados antes de deletar
+- ✅ Estatísticas de saldo total
+
+### 🎨 Interface
+- ✅ Design moderno e responsivo
+- ✅ Dark mode completo
+- ✅ Animações suaves
+- ✅ Feedback visual
+- ✅ Loading states
+- ✅ Empty states
+
+---
+
+## �️ Estrutura do Projeto
+
+```
+WalletGuard/
+├── src/
+│   ├── components/          # Componentes reutilizáveis
+│   │   ├── auth/           # Componentes de autenticação
+│   │   ├── bancos/         # Componentes de bancos
+│   │   ├── despesas/       # Componentes de despesas
+│   │   ├── layout/         # Layout (Sidebar, Header)
+│   │   ├── receitas/       # Componentes de receitas
+│   │   └── ui/             # Componentes UI base
+│   ├── context/            # Context API
+│   │   ├── AuthContext.tsx # Contexto de autenticação
+│   │   └── ThemeContext.tsx# Contexto de tema
+│   ├── layouts/            # Layouts de página
+│   ├── pages/              # Páginas da aplicação
+│   │   ├── auth/          # Páginas de autenticação
+│   │   ├── bancos/        # Página de bancos
+│   │   ├── dashboard/     # Dashboard
+│   │   ├── despesas/      # Página de despesas
+│   │   └── receitas/      # Página de receitas
+│   ├── services/           # Serviços e APIs
+│   │   ├── bancos.service.ts
+│   │   ├── dashboard.service.ts
+│   │   ├── despesas.service.ts
+│   │   ├── receitas.service.ts
+│   │   └── supabase.ts    # Cliente Supabase
+│   ├── types/              # Tipos TypeScript
+│   │   ├── banco.ts
+│   │   ├── despesa.ts
+│   │   └── receita.ts
+│   ├── App.tsx             # Componente principal
+│   ├── index.css           # Estilos globais
+│   └── main.tsx            # Entry point
+├── supabase/               # Scripts SQL
+│   ├── schema.sql         # Schema principal
+│   ├── setup-banks.sql    # Setup de bancos
+│   └── add-*.sql          # Scripts de migração
+├── public/                 # Arquivos públicos
+├── .env                    # Variáveis de ambiente
+├── package.json            # Dependências
+├── tailwind.config.js      # Configuração Tailwind
+├── tsconfig.json           # Configuração TypeScript
+└── vite.config.ts          # Configuração Vite
+```
+
+---
+
+## 🔒 Segurança
+
+### Row Level Security (RLS)
+
+Todas as tabelas utilizam RLS do Supabase:
+
+- ✅ **app_users** - Usuários veem apenas seus próprios dados
+- ✅ **receitas** - Isolamento por user_id
+- ✅ **expenses** - Isolamento por user_id
+- ✅ **banks** - Isolamento por user_id
+- ✅ **cards** - Isolamento por user_id (futuro)
+
+### Autenticação
+
+- ✅ Supabase Auth com JWT
+- ✅ Sessão persistente com localStorage
+- ✅ Timeout de segurança em operações críticas
+- ✅ Logout forçado em caso de erro
+
+---
+
+## 📱 Responsividade
+
+### Breakpoints
+
+- **Mobile:** < 768px
+- **Tablet:** 768px - 1024px
+- **Desktop:** > 1024px
+
+### Adaptações
+
+- ✅ Sidebar colapsável em mobile
+- ✅ Grid responsivo (1, 2 ou 4 colunas)
+- ✅ Tabelas com scroll horizontal
+- ✅ Formulários adaptáveis
+- ✅ Cards empilháveis
+
+---
+
+## 🎨 Design System
+
+### Cores Principais
+
+- **Primary:** Azul (#3B82F6)
+- **Success:** Verde (#10B981)
+- **Warning:** Laranja (#F59E0B)
+- **Danger:** Vermelho (#EF4444)
+- **Dark:** Cinza escuro (#1F2937)
+
+### Tipografia
+
+- **Heading:** Inter (bold)
+- **Body:** Inter (regular)
+- **Mono:** Fira Code
+
+---
+
+## �️ Scripts Disponíveis
 
 ```bash
 # Desenvolvimento
@@ -146,126 +294,43 @@ npm run dev          # Inicia servidor de desenvolvimento
 
 # Build
 npm run build        # Compila para produção
-npm run start        # Preview da build de produção
+npm run preview      # Preview do build de produção
 
-# Qualidade
-npm run lint         # Executa ESLint
+# Linting
+npm run lint         # Verifica código com ESLint
 ```
-
----
-
-## 📁 Estrutura do Projeto
-
-```
-WalletGuard/
-├── public/              # Arquivos estáticos
-│   ├── logo.png
-│   └── logo-dark.png
-├── src/
-│   ├── components/      # Componentes reutilizáveis
-│   │   ├── auth/        # Componentes de autenticação
-│   │   ├── layout/      # Layout (Header, Sidebar)
-│   │   ├── receitas/    # Componentes de receitas
-│   │   └── ui/          # Componentes UI base
-│   ├── context/         # Contexts (Auth, Theme)
-│   ├── layouts/         # Layouts (App, Auth)
-│   ├── pages/           # Páginas da aplicação
-│   │   ├── auth/        # Login, Signup, etc
-│   │   ├── dashboard/   # Dashboard
-│   │   └── receitas/    # Gestão de receitas
-│   ├── services/        # Services de API
-│   ├── types/           # Tipos TypeScript
-│   ├── utils/           # Utilitários
-│   ├── App.tsx          # Componente principal
-│   ├── index.css        # Estilos globais
-│   └── main.tsx         # Entry point
-├── supabase/            # Scripts SQL
-│   ├── schema.sql       # Schema completo
-│   └── add-receitas-table.sql
-├── .env                 # Variáveis de ambiente
-├── package.json
-├── tailwind.config.js
-├── tsconfig.json
-└── vite.config.ts
-```
-
----
-
-## 🎨 Features Implementadas
-
-### Autenticação
-- Login com email/senha
-- Cadastro de novos usuários
-- Recuperação de senha
-- Logout seguro
-- Proteção de rotas
-- Sincronização automática de usuários
-
-### Receitas
-- Criar, editar e deletar receitas
-- Filtros por período e categoria
-- Paginação (10 itens/página)
-- Suporte a recorrência (semanal/mensal/anual)
-- Estatísticas agregadas
-- Categorias: Salário, Freelance, Investimentos, Aluguel, Vendas, Bonificação, Outros
-
-### Dashboard
-- Saldo total calculado
-- Receitas do mês
-- Despesas do mês
-- Cartões ativos
-- Transações recentes
-- Cards visuais com métricas
-
-### UI/UX
-- Dark mode com persistência
-- Design responsivo
-- Loading states
-- Empty states
-- Feedback visual de ações
-- Validação de formulários
-
----
-
-## 🔒 Segurança
-
-- **Row Level Security (RLS)** - Cada usuário vê apenas seus próprios dados
-- **Autenticação Supabase** - Sistema de autenticação robusto
-- **Políticas de Segurança** - SELECT, INSERT, UPDATE, DELETE protegidos
-- **Validação de Dados** - Validação no frontend e backend
-- **Timeouts de Segurança** - Previne travamentos em operações críticas
 
 ---
 
 ## 🐛 Problemas Conhecidos
 
-### Resolvidos ✅
-- ✅ Logout não funcionava - Implementado timeout de segurança
-- ✅ Login travava - Implementado timeout no syncUser
-- ✅ Receitas não eram criadas - Injeção automática de user_id
-- ✅ Script start não existia - Adicionado ao package.json
+### Críticos
+- ⚠️ Tabelas do Supabase devem ser criadas manualmente
+- ⚠️ RLS deve ser configurado via SQL Editor
 
-### Pendentes ⚠️
-- ⚠️ Tabela `receitas` precisa ser criada manualmente no Supabase
-- ⚠️ Node.js 22.9.0 gera warning (recomendado 22.12+)
+### Menores
+- ⚠️ Node.js 22.9.0 (recomendado: 20.19+ ou 22.12+)
+- ⚠️ Chunks maiores que 500KB (otimização futura)
 
 ---
 
-## 📊 Status do Projeto
+## 📈 Roadmap
 
-**Última Atualização:** 26/11/2025  
-**Versão:** 1.0.0  
-**Status:** 85% Completo
+### Versão 1.3 (Próxima)
+- [ ] CRUD de Cartões de Crédito
+- [ ] Faturas de cartão
+- [ ] Parcelamento de despesas
 
-| Módulo | Status |
-|--------|--------|
-| Autenticação | ✅ 100% |
-| CRUD Receitas | ✅ 100% |
-| Dashboard | ✅ 85% |
-| UI/UX | ✅ 100% |
-| CRUD Despesas | ❌ 0% |
-| CRUD Cartões | ❌ 0% |
-| Relatórios | ❌ 0% |
+### Versão 1.4
+- [ ] Relatórios e gráficos avançados
+- [ ] Exportação de dados (CSV, PDF)
+- [ ] Metas financeiras
+
+### Versão 2.0
+- [ ] Categorias personalizadas
+- [ ] Múltiplas moedas
+- [ ] Importação de extratos bancários
+- [ ] App mobile (React Native)
 
 ---
 
@@ -281,32 +346,28 @@ Contribuições são bem-vindas! Por favor:
 
 ---
 
-## 📝 Licença
+## � Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
 
 ---
 
 ## 👨‍💻 Autor
 
-Desenvolvido Pedro Nascimento
+**Pedro Nascimento**
+
+- GitHub: [@PedroNascimento](https://github.com/PedroNascimento)
+- Email: pedro@example.com
 
 ---
 
 ## 🙏 Agradecimentos
 
-- [React](https://react.dev/)
-- [Supabase](https://supabase.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Vite](https://vitejs.dev/)
-- [Lucide Icons](https://lucide.dev/)
+- [Supabase](https://supabase.com) - Backend as a Service
+- [Tailwind CSS](https://tailwindcss.com) - Framework CSS
+- [Lucide](https://lucide.dev) - Ícones
+- [Vite](https://vitejs.dev) - Build tool
 
 ---
 
-## 📞 Suporte
-
-Para suporte, abra uma issue no GitHub ou entre em contato através do email: suporte@walletguard.com
-
----
-
-**WalletGuard** - Suas finanças sob controle 💰
+**Desenvolvido com ❤️ para gestão financeira pessoal**

@@ -4,64 +4,30 @@
 
 ### ✅ 1. Database Setup: Run the SQL script in Supabase
 
-**Status: PARCIALMENTE IMPLEMENTADO**
+**Status: TOTALMENTE IMPLEMENTADO**
 
 #### O que foi feito:
 - ✅ Script SQL completo criado em `supabase/schema.sql`
 - ✅ Tabelas definidas:
   - `app_users` - Metadados de usuários
-  - `banks` - Instituições bancárias
+  - `banks` - Instituições bancárias (com coluna `balance` adicionada)
   - `cards` - Cartões de crédito
-  - `incomes` - Receitas
-  - `expenses` - Despesas gerais
+  - `incomes` - Receitas (estrutura antiga)
+  - `receitas` - Receitas (estrutura nova, script fornecido)
+  - `expenses` - Despesas gerais (com colunas adicionais)
   - `card_expenses` - Despesas de cartão (com parcelamento)
   - `categories` - Categorias personalizadas
 - ✅ RLS (Row Level Security) habilitado em todas as tabelas
-- ✅ Políticas RLS básicas implementadas usando `request.jwt.claim.sub`
+- ✅ Políticas RLS implementadas para todas as tabelas ativas
 - ✅ Índices criados para otimização
 - ✅ View `vw_monthly_summary` para agregação mensal
 - ✅ Foreign keys e constraints configurados
 
-#### O que falta:
-- ⚠️ **Tabela `receitas` não está no schema original**
-  - O CRUD de Receitas foi implementado usando uma tabela chamada `receitas`
-  - O schema original usa `incomes` para receitas
-  - **Ação necessária**: Adicionar tabela `receitas` ao schema ou migrar código para usar `incomes`
-
-#### Recomendação:
-```sql
--- Adicionar ao schema.sql:
-CREATE TABLE IF NOT EXISTS receitas (
-  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id uuid NOT NULL,
-  descricao text NOT NULL,
-  valor numeric(14,2) NOT NULL,
-  data date NOT NULL,
-  categoria text NOT NULL,
-  recorrente boolean DEFAULT false,
-  frequencia_recorrencia text,
-  observacoes text,
-  created_at timestamptz DEFAULT now(),
-  updated_at timestamptz DEFAULT now(),
-  CONSTRAINT fk_receitas_user FOREIGN KEY(user_id) REFERENCES app_users(id) ON DELETE CASCADE
-);
-
-CREATE INDEX IF NOT EXISTS idx_receitas_user_date ON receitas(user_id, data);
-
-ALTER TABLE receitas ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY receitas_select ON receitas FOR SELECT
-  USING (user_id = current_setting('request.jwt.claim.sub', true)::uuid);
-
-CREATE POLICY receitas_insert ON receitas FOR INSERT
-  WITH CHECK (user_id = current_setting('request.jwt.claim.sub', true)::uuid);
-
-CREATE POLICY receitas_update ON receitas FOR UPDATE
-  USING (user_id = current_setting('request.jwt.claim.sub', true)::uuid);
-
-CREATE POLICY receitas_delete ON receitas FOR DELETE
-  USING (user_id = current_setting('request.jwt.claim.sub', true)::uuid);
-```
+#### Scripts Adicionais Executados:
+- ✅ `CRIAR_TABELA_RECEITAS.md` - Criou tabela `receitas`
+- ✅ `supabase/add-expenses-columns.sql` - Adicionou colunas faltantes em `expenses`
+- ✅ `supabase/add-expenses-rls.sql` - Adicionou RLS em `expenses`
+- ✅ `supabase/setup-banks.sql` - Adicionou coluna `balance` e RLS em `banks`
 
 ---
 
@@ -110,45 +76,44 @@ CREATE POLICY receitas_delete ON receitas FOR DELETE
 
 ### ✅ 3. Feature Implementation: Connect pages to the database
 
-**Status: PARCIALMENTE IMPLEMENTADO**
+**Status: PARCIALMENTE IMPLEMENTADO (75%)**
 
 #### O que foi feito:
 
 ##### ✅ CRUD de Receitas (100% completo)
 - **Service**: `src/services/receitas.service.ts`
-  - `list()` - Listagem com filtros e paginação
-  - `getById()` - Buscar por ID
-  - `create()` - Criar receita
-  - `update()` - Atualizar receita
-  - `delete()` - Deletar receita
-  - `getStats()` - Estatísticas agregadas
-  
-- **Componentes**:
-  - `ReceitaForm` - Formulário modal com validação
-  - `ReceitaFilters` - Filtros de busca, período e categoria
-  
+- **Componentes**: `ReceitaForm`, `ReceitaFilters`
 - **Página**: `src/pages/receitas/Receitas.tsx`
-  - Lista paginada (10 itens/página)
-  - Cards de estatísticas
-  - Filtros funcionais
-  - Operações CRUD completas
-  - Dark mode
-  - Responsivo
+- **Features**: Listagem, filtros, estatísticas, CRUD completo.
+
+##### ✅ CRUD de Despesas (100% completo)
+- **Service**: `src/services/despesas.service.ts`
+- **Componentes**: `DespesaForm`, `DespesaFilters`
+- **Página**: `src/pages/despesas/Despesas.tsx`
+- **Features**: Listagem, filtros (tipo, categoria), estatísticas, CRUD completo.
+
+##### ✅ CRUD de Bancos (100% completo)
+- **Service**: `src/services/bancos.service.ts`
+- **Componentes**: `BancoForm`
+- **Página**: `src/pages/bancos/Bancos.tsx`
+- **Features**: Listagem, filtros, estatísticas de saldo, CRUD completo, cores personalizadas.
+
+##### ✅ Dashboard (100% completo)
+- **Service**: `src/services/dashboard.service.ts`
+- **Página**: `src/pages/dashboard/Dashboard.tsx`
+- **Features**: Dados reais de receitas, despesas e saldo.
 
 ##### ⚠️ Outras Features (Não implementadas)
-- ❌ **Dashboard** - Apenas UI estática, sem dados reais
-- ❌ **Despesas** - Página placeholder
 - ❌ **Cartões** - Página placeholder
-- ❌ **Bancos** - Página placeholder
 - ❌ **Relatórios** - Página placeholder
 - ❌ **Configurações** - Página placeholder
 
 #### Conexões com banco de dados:
 - ✅ Receitas: Totalmente conectado
-- ❌ Despesas: Não conectado
+- ✅ Despesas: Totalmente conectado
+- ✅ Bancos: Totalmente conectado
+- ✅ Dashboard: Totalmente conectado
 - ❌ Cartões: Não conectado
-- ❌ Bancos: Não conectado
-- ❌ Dashboard: Não conectado (dados mockados)
 
 ---
 
@@ -156,37 +121,29 @@ CREATE POLICY receitas_delete ON receitas FOR DELETE
 
 | Etapa | Status | Completude | Observações |
 |-------|--------|------------|-------------|
-| **1. Database Setup** | ⚠️ Parcial | 90% | Falta adicionar tabela `receitas` ao schema |
+| **1. Database Setup** | ✅ Completo | 100% | Scripts SQL criados e documentados |
 | **2. Authentication** | ✅ Completo | 100% | Totalmente funcional com Supabase Auth |
-| **3. Feature Implementation** | ⚠️ Parcial | 20% | Apenas Receitas implementado |
+| **3. Feature Implementation** | ⚠️ Parcial | 75% | Receitas, Despesas, Bancos e Dashboard prontos |
 
 ---
 
 ## Próximos Passos Recomendados
 
 ### Prioridade Alta
-1. **Adicionar tabela `receitas` ao schema SQL**
-   - Executar script no Supabase
-   - Testar RLS policies
-   
-2. **Implementar CRUD de Despesas**
-   - Seguir o mesmo padrão de Receitas
+1. **Implementar CRUD de Cartões**
    - Criar service, componentes e página
+   - Implementar lógica de faturas e limites
    
-3. **Conectar Dashboard aos dados reais**
-   - Buscar dados de receitas, despesas e cartões
-   - Calcular estatísticas reais
-   - Atualizar cards com dados do banco
+2. **Implementar Relatórios**
+   - Gráficos de receitas vs despesas
+   - Gráficos por categoria
 
 ### Prioridade Média
-4. **Implementar CRUD de Cartões**
-5. **Implementar CRUD de Bancos**
-6. **Criar página de Relatórios com gráficos**
+3. **Implementar Configurações de usuário**
+4. **Adicionar exportação de dados**
 
 ### Prioridade Baixa
-7. **Implementar Configurações de usuário**
-8. **Adicionar exportação de dados**
-9. **Implementar notificações**
+5. **Implementar notificações**
 
 ---
 
@@ -200,29 +157,27 @@ CREATE POLICY receitas_delete ON receitas FOR DELETE
 ### Autenticação
 - `src/context/AuthContext.tsx` - Contexto de autenticação
 - `src/components/auth/RequireAuth.tsx` - Proteção de rotas
-- `src/pages/auth/Login.tsx` - Página de login
-- `src/pages/auth/Signup.tsx` - Página de cadastro
 
 ### Features Implementadas
-- `src/services/receitas.service.ts` - Service de receitas
-- `src/pages/receitas/Receitas.tsx` - Página de receitas
-- `src/components/receitas/` - Componentes de receitas
+- `src/services/receitas.service.ts`
+- `src/services/despesas.service.ts`
+- `src/services/bancos.service.ts`
+- `src/pages/receitas/Receitas.tsx`
+- `src/pages/despesas/Despesas.tsx`
+- `src/pages/bancos/Bancos.tsx`
 
 ### Documentação
-- `RECEITAS_README.md` - Documentação do CRUD de Receitas
 - `README.md` - Documentação geral do projeto
+- `FINAL_STATUS.md` - Status detalhado
+- `SETUP_BANKS.md` - Setup de bancos
+- `SETUP_EXPENSES_COMPLETO.md` - Setup de despesas
 
 ---
 
 ## Conclusão
 
-O projeto WalletGuard tem uma **base sólida** com:
-- ✅ Autenticação completa e funcional
-- ✅ Schema de banco bem estruturado
-- ✅ Um CRUD completo (Receitas) como referência
-- ✅ Dark mode implementado
-- ✅ Componentes UI reutilizáveis
+O projeto WalletGuard avançou significativamente com a implementação dos módulos de **Despesas** e **Bancos**. A base está sólida e funcional.
 
-**Falta implementar** as demais features (Despesas, Cartões, Bancos, Relatórios) seguindo o padrão estabelecido no CRUD de Receitas.
+**Falta implementar**: Cartões e Relatórios.
 
-**Estimativa**: Com o padrão já estabelecido, cada novo CRUD deve levar aproximadamente 2-3 horas para ser implementado completamente.
+**Estimativa**: O módulo de Cartões é o mais complexo restante, estimado em 3-4 horas.

@@ -11,7 +11,7 @@ import { Dashboard } from './pages/dashboard/Dashboard';
 import { Receitas } from './pages/receitas/Receitas';
 import { Despesas } from './pages/despesas/Despesas';
 import { Cards } from './pages/cards/Cards';
-import { Banks } from './pages/banks/Banks';
+import { Bancos } from './pages/bancos/Bancos';
 import { Reports } from './pages/reports/Reports';
 import { Settings } from './pages/settings/Settings';
 
@@ -39,7 +39,7 @@ function App() {
               <Route path="/receitas" element={<Receitas />} />
               <Route path="/despesas" element={<Despesas />} />
               <Route path="/cartoes" element={<Cards />} />
-              <Route path="/bancos" element={<Banks />} />
+              <Route path="/bancos" element={<Bancos />} />
               <Route path="/relatorios" element={<Reports />} />
               <Route path="/configuracoes" element={<Settings />} />
             </Route>
