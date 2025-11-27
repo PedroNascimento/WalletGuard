@@ -5,6 +5,8 @@ import { Input } from '../ui/Input';
 import type { Despesa, DespesaFormData } from '../../types/despesa';
 import { CATEGORIAS_DESPESA, TIPOS_DESPESA } from '../../types/despesa';
 
+import { useToast } from '../../context/ToastContext';
+
 interface DespesaFormProps {
     despesa?: Despesa | null;
     onSubmit: (data: DespesaFormData) => Promise<void>;
@@ -12,6 +14,7 @@ interface DespesaFormProps {
 }
 
 export const DespesaForm: React.FC<DespesaFormProps> = ({ despesa, onSubmit, onCancel }) => {
+    const { addToast } = useToast();
     const [formData, setFormData] = useState<DespesaFormData>({
         descricao: '',
         valor: '' as any,
@@ -76,7 +79,7 @@ export const DespesaForm: React.FC<DespesaFormProps> = ({ despesa, onSubmit, onC
             await onSubmit(formData);
         } catch (error) {
             console.error('Erro ao salvar despesa:', error);
-            alert('Erro ao salvar despesa. Tente novamente.');
+            addToast('Erro ao salvar despesa. Tente novamente.', 'error');
         } finally {
             setLoading(false);
         }

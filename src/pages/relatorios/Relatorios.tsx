@@ -13,7 +13,10 @@ import { Download, TrendingUp, TrendingDown, Wallet } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 
+import { useToast } from '../../context/ToastContext';
+
 export const Relatorios: React.FC = () => {
+    const { addToast } = useToast();
     const [filters, setFilters] = useState<RelatorioFilters>({
         startDate: format(startOfMonth(new Date()), 'yyyy-MM-dd'),
         endDate: format(endOfMonth(new Date()), 'yyyy-MM-dd'),
@@ -42,80 +45,86 @@ export const Relatorios: React.FC = () => {
             setPrevisaoData(previsoes);
         } catch (error) {
             console.error('Erro ao carregar relatório:', error);
-            alert('Erro ao gerar relatório.');
+            addToast('Erro ao gerar relatório.', 'error');
         } finally {
             setLoading(false);
         }
     };
 
     const handleExportPDF = () => {
-        const doc = new jsPDF();
+        try {
+            const doc = new jsPDF();
 
-        // Título
-        doc.setFontSize(20);
-        doc.text('Relatório Financeiro - WalletGuard', 14, 22);
+            // Título
+            doc.setFontSize(20);
+            doc.text('Relatório Financeiro - WalletGuard', 14, 22);
 
-        doc.setFontSize(10);
-        doc.text(`Período: ${format(new Date(filters.startDate), 'dd/MM/yyyy')} a ${format(new Date(filters.endDate), 'dd/MM/yyyy')}`, 14, 30);
-        doc.text(`Gerado em: ${new Date().toLocaleString()}`, 14, 35);
+            doc.setFontSize(10);
+            doc.text(`Período: ${format(new Date(filters.startDate), 'dd/MM/yyyy')} a ${format(new Date(filters.endDate), 'dd/MM/yyyy')}`, 14, 30);
+            doc.text(`Gerado em: ${new Date().toLocaleString()}`, 14, 35);
 
-        // Resumo
-        if (resumo) {
+            // Resumo
+            if (resumo) {
+                doc.setFontSize(14);
+                doc.text('Resumo do Período', 14, 45);
+
+                const resumoData = [
+                    ['Receitas Totais', `R$ ${resumo.totalReceitas.toFixed(2)}`],
+                    ['Despesas Totais', `R$ ${resumo.totalDespesas.toFixed(2)}`],
+                    ['Saldo', `R$ ${resumo.saldo.toFixed(2)}`],
+                    ['Maior Despesa', `${resumo.maiorDespesa.description} (R$ ${resumo.maiorDespesa.value.toFixed(2)})`]
+                ];
+
+                autoTable(doc, {
+                    startY: 50,
+                    head: [['Item', 'Valor']],
+                    body: resumoData,
+                    theme: 'striped',
+                    headStyles: { fillColor: [59, 130, 246] }
+                });
+            }
+
+            // Categorias
             doc.setFontSize(14);
-            doc.text('Resumo do Período', 14, 45);
+            doc.text('Gastos por Categoria', 14, (doc as any).lastAutoTable.finalY + 15);
 
-            const resumoData = [
-                ['Receitas Totais', `R$ ${resumo.totalReceitas.toFixed(2)}`],
-                ['Despesas Totais', `R$ ${resumo.totalDespesas.toFixed(2)}`],
-                ['Saldo', `R$ ${resumo.saldo.toFixed(2)}`],
-                ['Maior Despesa', `${resumo.maiorDespesa.description} (R$ ${resumo.maiorDespesa.value.toFixed(2)})`]
-            ];
+            const catBody = categoryData.map(c => [c.name, `${c.percentage.toFixed(1)}%`, `R$ ${c.value.toFixed(2)}`]);
 
             autoTable(doc, {
-                startY: 50,
-                head: [['Item', 'Valor']],
-                body: resumoData,
-                theme: 'striped',
-                headStyles: { fillColor: [59, 130, 246] }
+                startY: (doc as any).lastAutoTable.finalY + 20,
+                head: [['Categoria', '%', 'Valor']],
+                body: catBody,
+                theme: 'grid'
             });
+
+            // Previsões
+            doc.addPage();
+            doc.setFontSize(14);
+            doc.text('Previsão de Gastos Futuros', 14, 20);
+
+            const prevBody = previsaoData.map(p => [
+                format(new Date(p.date), 'dd/MM/yyyy'),
+                p.description,
+                p.category,
+                p.origin,
+                `R$ ${p.value.toFixed(2)}`
+            ]);
+
+            autoTable(doc, {
+                startY: 25,
+                head: [['Data', 'Descrição', 'Categoria', 'Origem', 'Valor']],
+                body: prevBody,
+                theme: 'striped'
+            });
+
+            // Forçar download via file-saver para garantir compatibilidade
+            const pdfBlob = doc.output('blob');
+            saveAs(pdfBlob, `relatorio-financeiro-${format(new Date(), 'yyyy-MM-dd')}.pdf`);
+            addToast('Relatório gerado com sucesso!', 'success');
+        } catch (error) {
+            console.error('Erro ao exportar PDF:', error);
+            addToast('Erro ao exportar PDF.', 'error');
         }
-
-        // Categorias
-        doc.setFontSize(14);
-        doc.text('Gastos por Categoria', 14, (doc as any).lastAutoTable.finalY + 15);
-
-        const catBody = categoryData.map(c => [c.name, `${c.percentage.toFixed(1)}%`, `R$ ${c.value.toFixed(2)}`]);
-
-        autoTable(doc, {
-            startY: (doc as any).lastAutoTable.finalY + 20,
-            head: [['Categoria', '%', 'Valor']],
-            body: catBody,
-            theme: 'grid'
-        });
-
-        // Previsões
-        doc.addPage();
-        doc.setFontSize(14);
-        doc.text('Previsão de Gastos Futuros', 14, 20);
-
-        const prevBody = previsaoData.map(p => [
-            format(new Date(p.date), 'dd/MM/yyyy'),
-            p.description,
-            p.category,
-            p.origin,
-            `R$ ${p.value.toFixed(2)}`
-        ]);
-
-        autoTable(doc, {
-            startY: 25,
-            head: [['Data', 'Descrição', 'Categoria', 'Origem', 'Valor']],
-            body: prevBody,
-            theme: 'striped'
-        });
-
-        // Forçar download via file-saver para garantir compatibilidade
-        const pdfBlob = doc.output('blob');
-        saveAs(pdfBlob, `relatorio-financeiro-${format(new Date(), 'yyyy-MM-dd')}.pdf`);
     };
 
     const formatCurrency = (value: number) => {

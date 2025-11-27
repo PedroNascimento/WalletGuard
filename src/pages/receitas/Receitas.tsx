@@ -8,7 +8,10 @@ import { receitasService } from '../../services/receitas.service';
 import type { Receita, ReceitaFormData, ReceitaFilters } from '../../types/receita';
 import { ConfirmModal } from '../../components/ui/ConfirmModal';
 
+import { useToast } from '../../context/ToastContext';
+
 export const Receitas: React.FC = () => {
+    const { addToast } = useToast();
     const [receitas, setReceitas] = useState<Receita[]>([]);
     const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
@@ -46,7 +49,7 @@ export const Receitas: React.FC = () => {
             setTotalCount(result.count);
         } catch (error) {
             console.error('Erro ao carregar receitas:', error);
-            // alert('Erro ao carregar receitas. Verifique sua conexão.');
+            addToast('Erro ao carregar receitas. Verifique sua conexão.', 'error');
         } finally {
             setLoading(false);
         }
@@ -70,9 +73,10 @@ export const Receitas: React.FC = () => {
             setShowForm(false);
             loadReceitas();
             loadStats();
+            addToast('Receita criada com sucesso!', 'success');
         } catch (error) {
             console.error('Erro ao criar receita:', error);
-            alert('Erro ao criar receita. Tente novamente.');
+            addToast('Erro ao criar receita. Tente novamente.', 'error');
         }
     };
 
@@ -85,9 +89,10 @@ export const Receitas: React.FC = () => {
             setEditingReceita(null);
             loadReceitas();
             loadStats();
+            addToast('Receita atualizada com sucesso!', 'success');
         } catch (error) {
             console.error('Erro ao atualizar receita:', error);
-            alert('Erro ao atualizar receita. Tente novamente.');
+            addToast('Erro ao atualizar receita. Tente novamente.', 'error');
         }
     };
 
@@ -107,9 +112,10 @@ export const Receitas: React.FC = () => {
             setDeleteConfirmation({ isOpen: false, id: null });
             loadReceitas();
             loadStats();
+            addToast('Receita excluída com sucesso!', 'success');
         } catch (error: any) {
             console.error('Erro ao excluir receita:', error);
-            alert(`Erro ao excluir: ${error.message || 'Erro desconhecido'}`);
+            addToast(`Erro ao excluir: ${error.message || 'Erro desconhecido'}`, 'error');
         } finally {
             setIsDeleting(false);
         }

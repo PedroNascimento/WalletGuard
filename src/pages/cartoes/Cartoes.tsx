@@ -8,7 +8,10 @@ import { ConfirmModal } from '../../components/ui/ConfirmModal';
 import { cardsService } from '../../services/cards.service';
 import type { Card as CardType, CardFormData } from '../../types/card';
 
+import { useToast } from '../../context/ToastContext';
+
 export const Cartoes: React.FC = () => {
+    const { addToast } = useToast();
     const navigate = useNavigate();
     const [cartoes, setCartoes] = useState<CardType[]>([]);
     const [loading, setLoading] = useState(true);
@@ -36,6 +39,7 @@ export const Cartoes: React.FC = () => {
             setCartoes(data);
         } catch (error) {
             console.error('Erro ao carregar cartões:', error);
+            addToast('Erro ao carregar cartões.', 'error');
         } finally {
             setLoading(false);
         }
@@ -46,9 +50,10 @@ export const Cartoes: React.FC = () => {
             await cardsService.create(data);
             setShowForm(false);
             loadCartoes();
+            addToast('Cartão criado com sucesso!', 'success');
         } catch (error) {
             console.error('Erro ao criar cartão:', error);
-            alert('Erro ao criar cartão. Tente novamente.');
+            addToast('Erro ao criar cartão. Tente novamente.', 'error');
         }
     };
 
@@ -59,9 +64,10 @@ export const Cartoes: React.FC = () => {
             setShowForm(false);
             setEditingCard(null);
             loadCartoes();
+            addToast('Cartão atualizado com sucesso!', 'success');
         } catch (error) {
             console.error('Erro ao atualizar cartão:', error);
-            alert('Erro ao atualizar cartão. Tente novamente.');
+            addToast('Erro ao atualizar cartão. Tente novamente.', 'error');
         }
     };
 
@@ -76,9 +82,10 @@ export const Cartoes: React.FC = () => {
             await cardsService.delete(deleteConfirmation.card.id);
             setDeleteConfirmation({ isOpen: false, card: null });
             loadCartoes();
+            addToast('Cartão excluído com sucesso!', 'success');
         } catch (error: any) {
             console.error('Erro ao excluir cartão:', error);
-            alert(`Erro ao excluir: ${error.message || 'Erro desconhecido'}`);
+            addToast(`Erro ao excluir: ${error.message || 'Erro desconhecido'}`, 'error');
         } finally {
             setIsDeleting(false);
         }

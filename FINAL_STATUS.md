@@ -52,6 +52,9 @@
 - Dark Mode, Responsividade, Feedback visual.
 - **Novo:** Sistema de notificações (Toasts) para feedback amigável.
 - **Novo:** Atualização automática do avatar no Dashboard após upload.
+- **Melhoria:** Lazy Loading implementado nas rotas para performance.
+- **Melhoria:** Substituição total de `alert()` por Toasts.
+- **Doc:** Guias de Deploy e QA adicionados.
 
 ---
 

@@ -5,6 +5,8 @@ import { Input } from '../ui/Input';
 import type { Banco, BancoFormData } from '../../types/banco';
 import { TIPOS_BANCO, CORES_BANCO } from '../../types/banco';
 
+import { useToast } from '../../context/ToastContext';
+
 interface BancoFormProps {
     banco?: Banco | null;
     onSubmit: (data: BancoFormData) => Promise<void>;
@@ -12,6 +14,7 @@ interface BancoFormProps {
 }
 
 export const BancoForm: React.FC<BancoFormProps> = ({ banco, onSubmit, onCancel }) => {
+    const { addToast } = useToast();
     const [formData, setFormData] = useState<BancoFormData>({
         name: '',
         type: 'corrente',
@@ -61,7 +64,7 @@ export const BancoForm: React.FC<BancoFormProps> = ({ banco, onSubmit, onCancel 
             await onSubmit(dataToSubmit);
         } catch (error) {
             console.error('Erro ao salvar banco:', error);
-            alert('Erro ao salvar banco. Tente novamente.');
+            addToast('Erro ao salvar banco. Tente novamente.', 'error');
         } finally {
             setLoading(false);
         }
@@ -126,8 +129,8 @@ export const BancoForm: React.FC<BancoFormProps> = ({ banco, onSubmit, onCancel 
                                     type="button"
                                     onClick={() => setFormData({ ...formData, color: cor.value })}
                                     className={`h-10 rounded-lg border-2 transition-all ${formData.color === cor.value
-                                            ? 'border-gray-900 dark:border-white scale-110'
-                                            : 'border-gray-300 dark:border-gray-600 hover:scale-105'
+                                        ? 'border-gray-900 dark:border-white scale-110'
+                                        : 'border-gray-300 dark:border-gray-600 hover:scale-105'
                                         }`}
                                     style={{ backgroundColor: cor.value }}
                                     title={cor.label}

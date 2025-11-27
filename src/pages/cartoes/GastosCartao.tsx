@@ -7,7 +7,10 @@ import { CardExpenseForm } from '../../components/cartoes/CardExpenseForm';
 import { cardsService } from '../../services/cards.service';
 import type { Card as CardType, CardExpense, InvoiceSummary } from '../../types/card';
 
+import { useToast } from '../../context/ToastContext';
+
 export const GastosCartao: React.FC = () => {
+    const { addToast } = useToast();
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const [card, setCard] = useState<CardType | null>(null);
@@ -44,7 +47,7 @@ export const GastosCartao: React.FC = () => {
             setSummary(summaryData);
         } catch (error) {
             console.error('Erro ao carregar dados:', error);
-            alert('Erro ao carregar dados do cartão.');
+            addToast('Erro ao carregar dados do cartão.', 'error');
         } finally {
             setLoading(false);
         }
@@ -56,9 +59,10 @@ export const GastosCartao: React.FC = () => {
             await cardsService.createExpense(id, data);
             setShowForm(false);
             loadCardAndExpenses();
+            addToast('Despesa adicionada com sucesso!', 'success');
         } catch (error) {
             console.error('Erro ao criar despesa:', error);
-            alert('Erro ao criar despesa. Tente novamente.');
+            addToast('Erro ao criar despesa. Tente novamente.', 'error');
         }
     };
 

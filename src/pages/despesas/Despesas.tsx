@@ -8,7 +8,10 @@ import { despesasService } from '../../services/despesas.service';
 import type { Despesa, DespesaFormData, DespesaFilters } from '../../types/despesa';
 import { ConfirmModal } from '../../components/ui/ConfirmModal';
 
+import { useToast } from '../../context/ToastContext';
+
 export const Despesas: React.FC = () => {
+    const { addToast } = useToast();
     const [despesas, setDespesas] = useState<Despesa[]>([]);
     const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
@@ -48,7 +51,7 @@ export const Despesas: React.FC = () => {
             setTotalCount(result.count);
         } catch (error) {
             console.error('Erro ao carregar despesas:', error);
-            alert('Erro ao carregar despesas. Verifique sua conexão.');
+            addToast('Erro ao carregar despesas. Verifique sua conexão.', 'error');
         } finally {
             setLoading(false);
         }
@@ -72,8 +75,10 @@ export const Despesas: React.FC = () => {
             setShowForm(false);
             loadDespesas();
             loadStats();
+            addToast('Despesa criada com sucesso!', 'success');
         } catch (error) {
             console.error('Erro ao criar despesa:', error);
+            addToast('Erro ao criar despesa. Tente novamente.', 'error');
             throw error;
         }
     };
@@ -87,8 +92,10 @@ export const Despesas: React.FC = () => {
             setEditingDespesa(null);
             loadDespesas();
             loadStats();
+            addToast('Despesa atualizada com sucesso!', 'success');
         } catch (error) {
             console.error('Erro ao atualizar despesa:', error);
+            addToast('Erro ao atualizar despesa. Tente novamente.', 'error');
             throw error;
         }
     };
@@ -109,9 +116,10 @@ export const Despesas: React.FC = () => {
             setDeleteConfirmation({ isOpen: false, id: null });
             loadDespesas();
             loadStats();
+            addToast('Despesa excluída com sucesso!', 'success');
         } catch (error: any) {
             console.error('Erro ao excluir despesa:', error);
-            alert(`Erro ao excluir: ${error.message || 'Erro desconhecido'}`);
+            addToast(`Erro ao excluir: ${error.message || 'Erro desconhecido'}`, 'error');
         } finally {
             setIsDeleting(false);
         }

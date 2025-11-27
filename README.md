@@ -115,6 +115,9 @@ http://localhost:5173
 ## � Documentação
 
 ### Guias de Setup
+- 📄 [DEPLOY_GUIDE.md](DEPLOY_GUIDE.md) - Guia completo de Deploy (Supabase + Vercel)
+- 📄 [QA_CHECKLIST.md](QA_CHECKLIST.md) - Checklist de Qualidade antes do deploy
+- 📄 [FINAL_SCHEMA.sql](FINAL_SCHEMA.sql) - Schema SQL completo do banco de dados
 - 📄 [CRIAR_TABELA_RECEITAS.md](CRIAR_TABELA_RECEITAS.md) - Setup da tabela de receitas
 - 📄 [SETUP_EXPENSES_COMPLETO.md](SETUP_EXPENSES_COMPLETO.md) - Setup da tabela de despesas
 - 📄 [SETUP_BANKS.md](SETUP_BANKS.md) - Setup da tabela de bancos

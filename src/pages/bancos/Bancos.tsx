@@ -8,7 +8,10 @@ import type { Banco, BancoFormData, BancoFilters } from '../../types/banco';
 import { TIPOS_BANCO } from '../../types/banco';
 import { ConfirmModal } from '../../components/ui/ConfirmModal';
 
+import { useToast } from '../../context/ToastContext';
+
 export const Bancos: React.FC = () => {
+    const { addToast } = useToast();
     const [bancos, setBancos] = useState<Banco[]>([]);
     const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
@@ -46,7 +49,7 @@ export const Bancos: React.FC = () => {
             setBancos(data);
         } catch (error) {
             console.error('Erro ao carregar bancos:', error);
-            alert('Erro ao carregar bancos. Verifique sua conexão.');
+            addToast('Erro ao carregar bancos. Verifique sua conexão.', 'error');
         } finally {
             setLoading(false);
         }
@@ -67,6 +70,7 @@ export const Bancos: React.FC = () => {
             setShowForm(false);
             loadBancos();
             loadStats();
+            addToast('Banco criado com sucesso!', 'success');
         } catch (error) {
             console.error('Erro ao criar banco:', error);
             throw error;
@@ -82,6 +86,7 @@ export const Bancos: React.FC = () => {
             setEditingBanco(null);
             loadBancos();
             loadStats();
+            addToast('Banco atualizado com sucesso!', 'success');
         } catch (error) {
             console.error('Erro ao atualizar banco:', error);
             throw error;
@@ -128,9 +133,10 @@ export const Bancos: React.FC = () => {
             setDeleteConfirmation({ isOpen: false, banco: null, message: '' });
             loadBancos();
             loadStats();
+            addToast('Banco excluído com sucesso!', 'success');
         } catch (error: any) {
             console.error('Erro ao excluir banco:', error);
-            alert(`Erro ao excluir: ${error.message || 'Erro desconhecido'}`);
+            addToast(`Erro ao excluir: ${error.message || 'Erro desconhecido'}`, 'error');
         } finally {
             setIsDeleting(false);
         }
