@@ -18,12 +18,12 @@
 - ✅ **Despesas** - CRUD completo com filtros e recorrência
 - ✅ **Bancos** - CRUD completo com cores e saldos
 - ✅ **Cartões de Crédito** - CRUD, faturas e parcelamento
+- ✅ **Relatórios** - Gráficos, previsões e exportação PDF
 - ✅ **Dark Mode** - Tema escuro/claro
 - ✅ **Responsivo** - Mobile, Tablet e Desktop
 
 ### 🚧 Em Desenvolvimento
 
-- 🚧 **Relatórios** - Gráficos e exportação
 - 🚧 **Configurações** - Perfil e preferências
 
 ---
@@ -182,6 +182,15 @@ http://localhost:5173
 - ✅ Navegação entre faturas (anteriores/futuras)
 - ✅ Cálculo de uso do limite
 
+- ✅ Cálculo de uso do limite
+
+### 📈 Relatórios
+- ✅ Dashboard com evolução de receitas x despesas
+- ✅ Gráfico de distribuição por categoria
+- ✅ Filtros por período e categoria
+- ✅ Tabela de previsão de gastos futuros
+- ✅ Exportação completa em PDF
+
 ### 🎨 Interface
 - ✅ Design moderno e responsivo
 - ✅ Dark mode completo
@@ -337,10 +346,10 @@ npm run lint         # Verifica código com ESLint
 - [x] Faturas de cartão
 - [x] Parcelamento de despesas
 
-### Versão 1.4
-- [ ] Relatórios e gráficos avançados
-- [ ] Exportação de dados (CSV, PDF)
-- [ ] Metas financeiras
+### Versão 1.4 (Concluída)
+- [x] Relatórios e gráficos avançados
+- [x] Exportação de dados (PDF)
+- [ ] Metas financeiras (Futuro)
 
 ### Versão 2.0
 - [ ] Categorias personalizadas

@@ -13,7 +13,7 @@ import { Despesas } from './pages/despesas/Despesas';
 import { Cartoes } from './pages/cartoes/Cartoes';
 import { GastosCartao } from './pages/cartoes/GastosCartao';
 import { Bancos } from './pages/bancos/Bancos';
-import { Reports } from './pages/reports/Reports';
+import { Relatorios } from './pages/relatorios/Relatorios';
 import { Settings } from './pages/settings/Settings';
 
 function App() {
@@ -42,7 +42,7 @@ function App() {
               <Route path="/cartoes" element={<Cartoes />} />
               <Route path="/cartoes/:id/gastos" element={<GastosCartao />} />
               <Route path="/bancos" element={<Bancos />} />
-              <Route path="/relatorios" element={<Reports />} />
+              <Route path="/relatorios" element={<Relatorios />} />
               <Route path="/configuracoes" element={<Settings />} />
             </Route>
 
