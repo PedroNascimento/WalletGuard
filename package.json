@@ -1,7 +1,7 @@
 {
   "name": "wallet-guard",
   "private": true,
-  "version": "1.5.0",
+  "version": "1.5.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
