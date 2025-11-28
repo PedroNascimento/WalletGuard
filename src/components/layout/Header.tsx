@@ -2,6 +2,7 @@ import React from 'react';
 import { Menu, Bell, Sun, Moon, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useTheme } from '../../context/ThemeContext';
+import { useAuth } from '../../context/AuthContext';
 
 interface HeaderProps {
     onMenuClick: () => void;
@@ -11,6 +12,19 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onMenuClick, toggleSidebar, isSidebarCollapsed }) => {
     const { theme, toggleTheme } = useTheme();
+    const { user } = useAuth();
+
+    const avatarUrl = user?.user_metadata?.avatar_url;
+    const name = user?.user_metadata?.name || user?.email?.split('@')[0] || 'U';
+
+    const getInitials = (name: string) => {
+        return name
+            .split(' ')
+            .map(part => part[0])
+            .slice(0, 2)
+            .join('')
+            .toUpperCase();
+    };
 
     return (
         <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80 px-4 backdrop-blur-md lg:px-8 transition-colors">
@@ -48,8 +62,14 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick, toggleSidebar, isSi
                     <Bell size={20} />
                 </Button>
 
-                <div className="h-8 w-8 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-700 dark:text-primary-300 font-medium text-sm">
-                    JD
+                <div className="h-8 w-8 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center overflow-hidden ring-2 ring-transparent hover:ring-primary-500 transition-all cursor-pointer">
+                    {avatarUrl ? (
+                        <img src={avatarUrl} alt={name} className="h-full w-full object-cover" />
+                    ) : (
+                        <span className="text-primary-700 dark:text-primary-300 font-medium text-sm">
+                            {getInitials(name)}
+                        </span>
+                    )}
                 </div>
             </div>
         </header>
