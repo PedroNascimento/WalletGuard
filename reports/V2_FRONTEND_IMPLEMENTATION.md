@@ -42,6 +42,18 @@ O frontend das funcionalidades de **Metas Financeiras** e **Orçamentos** foi to
 - ✅ Exclusão de orçamentos
 - ✅ **Sincronização Automática:** Ao carregar a página, o orçamento do mês atual é sincronizado com as despesas reais lançadas.
 
+### 3. Melhorias de UX (UI Components)
+
+#### CurrencyInput (`src/components/ui/CurrencyInput.tsx`)
+Novo componente criado para padronizar a entrada de valores monetários.
+- ✅ Formatação automática para BRL (R$)
+- ✅ Prevenção de erros de digitação decimal
+- ✅ Integrado em todos os formulários de Metas e Orçamentos
+
+#### Usabilidade
+- ✅ **AutoFocus:** Campos principais recebem foco automático ao abrir modais.
+- ✅ **Feedback:** Indicadores visuais claros de status (cores, ícones).
+
 ---
 
 ## 🔗 Integração

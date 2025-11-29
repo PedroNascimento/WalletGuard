@@ -14,6 +14,7 @@ A aplicação está **funcional, segura e com build estável**, pronta para depl
 
 ### ✅ Pontos Fortes
 - **Novas Funcionalidades (v2.0):** Metas Financeiras e Orçamentos Mensais totalmente integrados.
+- **UX Aprimorada:** Implementação de `CurrencyInput` para formatação automática de moeda e foco automático em formulários.
 - **Build de Produção:** 100% funcional (`npm run build` em ~19s).
 - **Segurança:** Auditoria limpa (0 vulnerabilidades) e RLS completo em todas as tabelas.
 - **Identidade:** Nome e Favicon atualizados para "WalletGuard".
@@ -73,6 +74,7 @@ src/
 ├── components/     # UI Components
 │   ├── metas/      # Componentes de Metas (Novo)
 │   ├── orcamentos/ # Componentes de Orçamentos (Novo)
+│   ├── ui/         # CurrencyInput, Button, Input, etc.
 │   └── ...
 ├── context/        # AuthContext, ThemeContext, ToastContext
 ├── layouts/        # AppLayout, AuthLayout
@@ -94,7 +96,7 @@ src/
 
 1.  **Imediato (v2.0.1):**
     *   Correções de bugs menores reportados por usuários (se houver).
-    *   Melhorias na UX de formulários.
+    *   Melhorias na UX de formulários (Concluído ✅).
 
 2.  **Curto Prazo (v2.1.0):**
     *   **Foco em Qualidade:** Recriar testes unitários para todos os serviços.
