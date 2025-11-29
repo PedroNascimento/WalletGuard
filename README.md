@@ -2,7 +2,7 @@
 
 > **Sistema Completo de Gestão Financeira Pessoal**
 
-[![Version](https://img.shields.io/badge/version-1.5.1-blue.svg)](https://github.com/PedroNascimento/WalletGuard)
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/PedroNascimento/WalletGuard)
 [![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/PedroNascimento/WalletGuard)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -10,7 +10,7 @@
 
 ## 🎯 Sobre o Projeto
 
-**WalletGuard** é uma aplicação web moderna e completa para gestão financeira pessoal, desenvolvida como um Progressive Web App (PWA). O sistema oferece controle total sobre suas finanças, permitindo o gerenciamento de receitas, despesas, contas bancárias e cartões de crédito em uma interface intuitiva e responsiva.
+**WalletGuard** é uma aplicação web moderna e completa para gestão financeira pessoal, desenvolvida como um Progressive Web App (PWA). O sistema oferece controle total sobre suas finanças, permitindo o gerenciamento de receitas, despesas, contas bancárias, cartões de crédito, metas e orçamentos em uma interface intuitiva e responsiva.
 
 ### 🌟 Objetivo
 
@@ -19,14 +19,15 @@ Fornecer uma ferramenta **gratuita, segura e completa** para que qualquer pessoa
 - 💰 Controlar receitas e despesas com categorização inteligente
 - 🏦 Gerenciar múltiplas contas bancárias e investimentos
 - 💳 Acompanhar faturas e limites de cartões de crédito
+- 🎯 Definir e alcançar metas financeiras
+- 🧮 Planejar orçamentos mensais e evitar gastos excessivos
 - 📈 Gerar relatórios detalhados e exportar dados
-- 🎯 Tomar decisões financeiras mais conscientes
 
 ---
 
 ## 📊 Status do Projeto
 
-**Versão Atual:** `1.5.1`  
+**Versão Atual:** `2.0.0`  
 **Status:** ✅ **Produção** (Build Estável)  
 **Última Atualização:** 28/11/2025  
 **Nome do Pacote:** `wallet-guard`
@@ -39,6 +40,8 @@ Fornecer uma ferramenta **gratuita, segura e completa** para que qualquer pessoa
 - ✅ **Dashboard** - Visão geral com estatísticas e gráficos
 - ✅ **Receitas** - CRUD completo com filtros e recorrência
 - ✅ **Despesas** - CRUD completo com filtros e recorrência
+- ✅ **Metas Financeiras** - Definição de objetivos e acompanhamento de progresso
+- ✅ **Orçamentos** - Planejamento mensal por categoria com alertas
 - ✅ **Bancos** - CRUD completo com cores e saldos
 - ✅ **Cartões de Crédito** - CRUD, faturas e parcelamento
 - ✅ **Relatórios** - Gráficos, previsões e exportação PDF
@@ -46,11 +49,11 @@ Fornecer uma ferramenta **gratuita, segura e completa** para que qualquer pessoa
 - ✅ **Dark Mode** - Tema escuro/claro
 - ✅ **Responsivo** - Mobile, Tablet e Desktop
 
-### 🚀 Próximos Passos (v2.0)
+### 🚀 Próximos Passos (v2.1)
 
-- 🚧 **Metas Financeiras**
-- 🚧 **Orçamentos**
-- 🚧 **Testes Unitários** (Recriação após correção de build)
+- 🚧 **Testes Unitários** (Recriação após atualização)
+- 🚧 **Otimização de Performance** (Code splitting avançado)
+- 🚧 **Importação de Extratos** (OFX/CSV)
 
 ---
 
@@ -118,17 +121,12 @@ Execute os scripts SQL no Supabase (na ordem):
 # 1. Schema principal
 supabase/schema.sql
 
-# 2. Tabela de receitas
-CRIAR_TABELA_RECEITAS.md
+# 2. Tabelas adicionais (Receitas, Despesas, Bancos, Cartões)
+# Consulte os arquivos em supabase/ ou reports/
 
-# 3. Colunas da tabela expenses
-SETUP_EXPENSES_COMPLETO.md
-
-# 4. Configuração da tabela banks
-SETUP_BANKS.md
-
-# 5. Configuração da tabela cards
-SETUP_CARDS.md
+# 3. Metas e Orçamentos (v2.0.0)
+supabase/setup-metas.sql
+supabase/setup-orcamentos.sql
 ```
 
 5. **Inicie o servidor de desenvolvimento**
@@ -145,26 +143,18 @@ http://localhost:5173
 
 ## 📚 Documentação
 
+### Guias de Implementação v2.0.0
+- 📄 [V2_IMPLEMENTATION_GUIDE.md](reports/V2_IMPLEMENTATION_GUIDE.md) - Guia Técnico de Implementação
+- 📄 [V2_FRONTEND_IMPLEMENTATION.md](reports/V2_FRONTEND_IMPLEMENTATION.md) - Detalhes do Frontend
+
 ### Guias de Setup
 - 📄 [DEPLOY_GUIDE.md](DEPLOY_GUIDE.md) - Guia completo de Deploy (Supabase + Vercel)
 - 📄 [PWA_GUIDE.md](PWA_GUIDE.md) - Guia de Instalação Mobile (PWA)
 - 📄 [QA_CHECKLIST.md](QA_CHECKLIST.md) - Checklist de Qualidade antes do deploy
-- 📄 [FINAL_SCHEMA.sql](FINAL_SCHEMA.sql) - Schema SQL completo do banco de dados
-- 📄 [CRIAR_TABELA_RECEITAS.md](CRIAR_TABELA_RECEITAS.md) - Setup da tabela de receitas
-- 📄 [SETUP_EXPENSES_COMPLETO.md](SETUP_EXPENSES_COMPLETO.md) - Setup da tabela de despesas
-- 📄 [SETUP_BANKS.md](SETUP_BANKS.md) - Setup da tabela de bancos
-- 📄 [SETUP_CARDS.md](SETUP_CARDS.md) - Setup da tabela de cartões
 
 ### Documentação Técnica
 - 📄 [PROJECT_STATUS_MASTER.md](reports/PROJECT_STATUS_MASTER.md) - **Relatório Mestre do Projeto**
-- 📄 [FINAL_STATUS.md](FINAL_STATUS.md) - Status detalhado do projeto
-- 📄 [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) - Status de implementação
-- 📄 [DESPESAS_README.md](DESPESAS_README.md) - Documentação do módulo de despesas
-- 📄 [BUGFIX_RECEITAS.md](BUGFIX_RECEITAS.md) - Correções aplicadas
-
-### Implementação
-- 📄 [IMPLEMENTACAO_DESPESAS.md](IMPLEMENTACAO_DESPESAS.md) - Detalhes da implementação de despesas
-- 📄 [TASK_WALLETGUARD_SCAFFOLDING.md](TASK_WALLETGUARD_SCAFFOLDING.md) - Tarefas e roadmap
+- 📄 [FINAL_SCHEMA.sql](FINAL_SCHEMA.sql) - Schema SQL completo do banco de dados
 
 ---
 
@@ -184,6 +174,20 @@ http://localhost:5173
 - Número de cartões ativos
 - Transações recentes
 - Resumo por categoria
+
+### 🎯 Metas Financeiras (Novo v2.0)
+- ✅ Criar metas com valor alvo e prazo
+- ✅ Acompanhar progresso visualmente
+- ✅ Adicionar contribuições avulsas
+- ✅ Status automático (Em andamento, Concluída, Atrasada)
+- ✅ Categorização (Viagem, Emergência, Investimento, etc.)
+
+### 🧮 Orçamentos (Novo v2.0)
+- ✅ Criar orçamentos mensais
+- ✅ Definir limites por categoria
+- ✅ Sincronização automática com despesas lançadas
+- ✅ Alertas visuais de gastos excedidos
+- ✅ Comparativo Planejado vs Realizado
 
 ### 💵 Receitas
 - ✅ Criar, editar, visualizar e deletar receitas
@@ -258,48 +262,30 @@ WalletGuard/
 │   │   ├── cartoes/        # Componentes de cartões
 │   │   ├── despesas/       # Componentes de despesas
 │   │   ├── layout/         # Layout (Sidebar, Header)
+│   │   ├── metas/          # Componentes de metas (v2.0)
+│   │   ├── orcamentos/     # Componentes de orçamentos (v2.0)
 │   │   ├── receitas/       # Componentes de receitas
 │   │   ├── relatorios/     # Componentes de relatórios
 │   │   └── ui/             # Componentes UI base
 │   ├── context/            # Context API
-│   │   ├── AuthContext.tsx # Contexto de autenticação
-│   │   ├── ThemeContext.tsx# Contexto de tema
-│   │   └── ToastContext.tsx# Contexto de notificações
 │   ├── layouts/            # Layouts de página
-│   │   ├── AppLayout.tsx   # Layout principal
-│   │   └── AuthLayout.tsx  # Layout de autenticação
 │   ├── pages/              # Páginas da aplicação
-│   │   ├── auth/          # Páginas de autenticação
-│   │   ├── bancos/        # Página de bancos
-│   │   ├── cartoes/       # Páginas de cartões
-│   │   ├── dashboard/     # Dashboard
-│   │   ├── despesas/      # Página de despesas
-│   │   ├── receitas/      # Página de receitas
-│   │   ├── relatorios/    # Página de relatórios
-│   │   └── settings/      # Configurações
+│   │   ├── metas/          # Página de metas (v2.0)
+│   │   ├── orcamentos/     # Página de orçamentos (v2.0)
+│   │   └── ...             # Outras páginas
 │   ├── services/           # Serviços e APIs
-│   │   ├── bancos.service.ts
-│   │   ├── cards.service.ts
-│   │   ├── dashboard.service.ts
-│   │   ├── despesas.service.ts
-│   │   ├── receitas.service.ts
-│   │   ├── relatorios.service.ts
-│   │   ├── user.service.ts
-│   │   └── supabase.ts    # Cliente Supabase
+│   │   ├── metas.service.ts
+│   │   ├── orcamentos.service.ts
+│   │   └── ...
 │   ├── types/              # Tipos TypeScript
-│   │   ├── banco.ts
-│   │   ├── card.ts
-│   │   ├── despesa.ts
-│   │   └── receita.ts
+│   │   ├── meta.ts
+│   │   ├── orcamento.ts
+│   │   └── ...
 │   ├── utils/              # Utilitários
-│   │   ├── cn.ts          # Class name merger
-│   │   └── financial.ts   # Cálculos financeiros
 │   ├── App.tsx             # Componente principal
 │   ├── index.css           # Estilos globais
 │   └── main.tsx            # Entry point
 ├── public/                 # Arquivos públicos
-│   ├── logo.png           # Logo da aplicação
-│   └── logo-dark.png      # Logo para dark mode
 ├── reports/                # Relatórios e documentação
 ├── supabase/               # Scripts SQL
 ├── .env                    # Variáveis de ambiente
@@ -323,6 +309,8 @@ Todas as tabelas utilizam RLS do Supabase:
 - ✅ **banks** - Isolamento por user_id
 - ✅ **cards** - Isolamento por user_id
 - ✅ **card_expenses** - Isolamento por user_id
+- ✅ **metas** - Isolamento por user_id (v2.0)
+- ✅ **orcamentos** - Isolamento por user_id (v2.0)
 
 ### Autenticação
 
@@ -390,7 +378,7 @@ npm run preview      # Preview do build de produção
 # Linting
 npm run lint         # Verifica código com ESLint
 
-# Testes (em desenvolvimento)
+# Testes
 npm test             # Executa testes unitários
 npm run test:watch   # Executa testes em modo watch
 npm run test:ui      # Interface gráfica dos testes
@@ -408,33 +396,29 @@ npm run test:coverage # Relatório de cobertura
 ### Menores
 - ⚠️ Node.js 22.9.0 (recomendado: 20.19+ ou 22.12+)
 - ⚠️ Chunks maiores que 500KB (otimização futura)
-- ⚠️ Ícones PWA pendentes (192x192 e 512x512)
 
 ### Dívida Técnica
-- ⚠️ Testes unitários removidos (necessário recriar)
+- ⚠️ Testes unitários precisam ser recriados para as novas funcionalidades
 
 ---
 
 ## 📈 Roadmap
 
-### Versão 1.5.1 (Atual)
+### Versão 2.0.0 (Atual)
+- [x] Metas financeiras
+- [x] Orçamentos mensais
+- [x] Ícones PWA
 - [x] Build estável
-- [x] Foto de perfil dinâmica
-- [x] Nome e favicon atualizados
-- [x] Documentação completa
 
-### Versão 1.6.0 (Próxima)
+### Versão 2.1.0 (Próxima)
 - [ ] Recriar testes unitários
-- [ ] Gerar ícones PWA
 - [ ] Otimização de chunks
+- [ ] Importação de extratos
 
-### Versão 2.0
-- [ ] Metas financeiras
-- [ ] Orçamentos mensais
-- [ ] Categorias personalizadas
+### Versão 3.0.0
 - [ ] Múltiplas moedas
-- [ ] Importação de extratos bancários
-- [ ] App mobile (React Native)
+- [ ] App mobile nativo (React Native)
+- [ ] Compartilhamento de contas (Família)
 
 ---
 

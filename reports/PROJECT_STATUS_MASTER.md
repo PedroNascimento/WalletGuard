@@ -1,26 +1,27 @@
 # 📊 Relatório de Status do Projeto: WalletGuard
 
 **Data:** 28/11/2025  
-**Versão:** 1.5.1  
+**Versão:** 2.0.0  
 **Branch Atual:** `main`
 
 ---
 
 ## 🚀 Visão Geral Executiva
 
-O projeto **WalletGuard** é um sistema de gestão financeira pessoal completo (PWA). Atualmente, a aplicação está **funcional, segura e com build estável**, pronta para deploy em produção.
+O projeto **WalletGuard** atingiu a versão **2.0.0**, marcando um grande avanço com a inclusão de funcionalidades estratégicas de planejamento financeiro: **Metas** e **Orçamentos**.
 
-Recentemente, o foco foi na estabilização do build e na correção de identidade visual (nome e favicon).
+A aplicação está **funcional, segura e com build estável**, pronta para deploy em produção.
 
 ### ✅ Pontos Fortes
-- **Build de Produção:** 100% funcional (`npm run build` em ~20s).
-- **Segurança:** Auditoria limpa (0 vulnerabilidades).
+- **Novas Funcionalidades (v2.0):** Metas Financeiras e Orçamentos Mensais totalmente integrados.
+- **Build de Produção:** 100% funcional (`npm run build` em ~19s).
+- **Segurança:** Auditoria limpa (0 vulnerabilidades) e RLS completo em todas as tabelas.
 - **Identidade:** Nome e Favicon atualizados para "WalletGuard".
-- **Funcionalidades:** CRUDs completos de Receitas, Despesas, Bancos e Cartões.
+- **PWA:** Ícones gerados e service worker configurado.
 
 ### ⚠️ Pontos de Atenção (Dívida Técnica)
-- **Cobertura de Testes:** Atualmente em **0%**. Todos os testes unitários foram removidos para viabilizar o build, pois estavam desatualizados em relação à implementação real dos componentes.
-- **Scripts:** O script `test` está ausente do `package.json`.
+- **Cobertura de Testes:** Atualmente baixa. Testes unitários precisam ser recriados para cobrir as novas funcionalidades e serviços.
+- **Performance:** Alguns chunks do build excedem 500KB, sugerindo necessidade de code splitting mais agressivo no futuro.
 
 ---
 
@@ -34,6 +35,8 @@ Recentemente, o foco foi na estabilização do build e na correção de identida
 | **Dashboard** | ✅ Pronto | Visão geral, Resumos, Gráficos iniciais. |
 | **Receitas** | ✅ Pronto | Listagem, Cadastro, Edição, Exclusão, Filtros. |
 | **Despesas** | ✅ Pronto | Listagem, Cadastro, Edição, Exclusão, Filtros. |
+| **Metas (v2.0)** | ✅ Pronto | Definição de objetivos, progresso visual, contribuições. |
+| **Orçamentos (v2.0)** | ✅ Pronto | Planejamento mensal, limites por categoria, alertas. |
 | **Bancos** | ✅ Pronto | Gestão de contas bancárias e saldos. |
 | **Cartões** | ✅ Pronto | Gestão de cartões de crédito e faturas. |
 | **Relatórios** | ✅ Pronto | Visualização de dados consolidados. |
@@ -43,23 +46,23 @@ Recentemente, o foco foi na estabilização do build e na correção de identida
 
 | Componente | Status | Detalhes |
 |------------|--------|----------|
-| **Frontend** | ✅ Pronto | React 18, Vite, TailwindCSS. |
+| **Frontend** | ✅ Pronto | React 19, Vite 7.2, TailwindCSS 4.1. |
 | **Backend** | ✅ Pronto | Supabase (Auth, DB, Storage, RLS). |
-| **PWA** | ✅ Pronto | Configurado (manifesto gerado), ícones pendentes. |
-| **CI/CD** | 🚧 Pendente | Scripts locais funcionam, mas sem pipeline automático. |
+| **PWA** | ✅ Pronto | Configurado, manifesto e ícones gerados. |
+| **CI/CD** | 🚧 Pendente | Scripts locais funcionam, pipeline automático pendente. |
 
 ---
 
 ## 📉 Análise de Qualidade e Testes
 
 ### Situação Atual
-Para corrigir erros bloqueantes de TypeScript no build (`tsc`), foi necessário remover os arquivos de teste que não correspondiam mais à implementação atual dos componentes.
+A prioridade foi a entrega das funcionalidades da v2.0.0 e a estabilização do build.
 
-- **Testes Unitários:** Removidos (Necessário recriar).
-- **Testes E2E:** Não configurados/executados.
-- **Linting:** Configurado e passando.
+- **Testes Unitários:** Pendentes de recriação.
+- **Testes E2E:** Não configurados.
+- **Linting:** Configurado e passando (sem erros no build).
 
-**Ação Recomendada:** Na próxima sprint, priorizar a recriação dos testes unitários para os componentes críticos (`AuthContext`, `financial.utils`, `Services`).
+**Ação Recomendada:** Na próxima sprint (v2.1), focar exclusivamente em qualidade de código e testes.
 
 ---
 
@@ -67,29 +70,39 @@ Para corrigir erros bloqueantes de TypeScript no build (`tsc`), foi necessário 
 
 ```
 src/
-├── components/     # UI Components (Buttons, Inputs, Cards, etc.)
-├── context/        # AuthContext, ThemeContext
+├── components/     # UI Components
+│   ├── metas/      # Componentes de Metas (Novo)
+│   ├── orcamentos/ # Componentes de Orçamentos (Novo)
+│   └── ...
+├── context/        # AuthContext, ThemeContext, ToastContext
 ├── layouts/        # AppLayout, AuthLayout
-├── pages/          # Rotas (Dashboard, Receitas, etc.)
-├── services/       # Integração Supabase (bancos, cards, despesas...)
-└── types/          # Definições TypeScript
+├── pages/          # Rotas
+│   ├── metas/      # Página de Metas (Novo)
+│   ├── orcamentos/ # Página de Orçamentos (Novo)
+│   └── ...
+├── services/       # Integração Supabase
+│   ├── metas.service.ts      # (Novo)
+│   ├── orcamentos.service.ts # (Novo)
+│   └── ...
+├── types/          # Definições TypeScript
+└── utils/          # Utilitários (financial.ts, cn.ts)
 ```
 
 ---
 
 ## 📅 Próximos Passos (Roadmap Sugerido)
 
-1.  **Imediato (v1.5.2):**
-    *   Gerar ícones PWA (`pwa-192x192.png`, `pwa-512x512.png`) e colocar em `public/`.
-    *   Restaurar script `test` no `package.json`.
+1.  **Imediato (v2.0.1):**
+    *   Correções de bugs menores reportados por usuários (se houver).
+    *   Melhorias na UX de formulários.
 
-2.  **Curto Prazo (v1.6.0):**
-    *   Recriar testes unitários para `utils` e `services` (Lógica de negócios).
-    *   Implementar testes de componentes UI básicos.
+2.  **Curto Prazo (v2.1.0):**
+    *   **Foco em Qualidade:** Recriar testes unitários para todos os serviços.
+    *   **Performance:** Otimizar chunks do build.
 
-3.  **Médio Prazo (v2.0.0):**
-    *   Metas Financeiras.
-    *   Orçamentos.
+3.  **Médio Prazo (v3.0.0):**
+    *   Importação de extratos bancários (OFX/CSV).
+    *   Compartilhamento de contas (Família).
     *   App Mobile Nativo.
 
 ---
