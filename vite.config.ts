@@ -39,4 +39,17 @@ export default defineConfig({
       }
     })
   ],
+  build: {
+    chunkSizeWarningLimit: 1000, // Aumenta limite para 1MB antes de avisar
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-ui': ['lucide-react', 'recharts'],
+          'vendor-utils': ['date-fns', 'file-saver', 'jspdf', 'html2canvas'],
+          'vendor-supabase': ['@supabase/supabase-js'],
+        }
+      }
+    }
+  }
 })

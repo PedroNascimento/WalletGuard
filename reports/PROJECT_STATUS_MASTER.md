@@ -10,19 +10,19 @@
 
 O projeto **WalletGuard** atingiu a versão **2.0.0**, marcando um grande avanço com a inclusão de funcionalidades estratégicas de planejamento financeiro: **Metas** e **Orçamentos**.
 
-A aplicação está **funcional, segura e com build estável**, pronta para deploy em produção.
+A aplicação está **funcional, segura e com build otimizado**, pronta para deploy em produção.
 
 ### ✅ Pontos Fortes
 - **Novas Funcionalidades (v2.0):** Metas Financeiras e Orçamentos Mensais totalmente integrados.
 - **UX Aprimorada:** Implementação de `CurrencyInput` para formatação automática de moeda e foco automático em formulários.
-- **Build de Produção:** 100% funcional (`npm run build` em ~19s).
+- **Performance:** Code splitting avançado implementado, reduzindo o tempo de carregamento inicial e otimizando o cache.
+- **Build de Produção:** 100% funcional (`npm run build` em ~18s).
 - **Segurança:** Auditoria limpa (0 vulnerabilidades) e RLS completo em todas as tabelas.
 - **Identidade:** Nome e Favicon atualizados para "WalletGuard".
 - **PWA:** Ícones gerados e service worker configurado.
 
 ### ⚠️ Pontos de Atenção (Dívida Técnica)
 - **Cobertura de Testes:** Atualmente baixa. Testes unitários precisam ser recriados para cobrir as novas funcionalidades e serviços.
-- **Performance:** Alguns chunks do build excedem 500KB, sugerindo necessidade de code splitting mais agressivo no futuro.
 
 ---
 
@@ -50,6 +50,7 @@ A aplicação está **funcional, segura e com build estável**, pronta para depl
 | **Frontend** | ✅ Pronto | React 19, Vite 7.2, TailwindCSS 4.1. |
 | **Backend** | ✅ Pronto | Supabase (Auth, DB, Storage, RLS). |
 | **PWA** | ✅ Pronto | Configurado, manifesto e ícones gerados. |
+| **Performance** | ✅ Otimizado | Code splitting configurado (Vendor Chunks). |
 | **CI/CD** | 🚧 Pendente | Scripts locais funcionam, pipeline automático pendente. |
 
 ---
@@ -97,10 +98,10 @@ src/
 1.  **Imediato (v2.0.1):**
     *   Correções de bugs menores reportados por usuários (se houver).
     *   Melhorias na UX de formulários (Concluído ✅).
+    *   Otimização de Performance (Concluído ✅).
 
 2.  **Curto Prazo (v2.1.0):**
     *   **Foco em Qualidade:** Recriar testes unitários para todos os serviços.
-    *   **Performance:** Otimizar chunks do build.
 
 3.  **Médio Prazo (v3.0.0):**
     *   Importação de extratos bancários (OFX/CSV).
