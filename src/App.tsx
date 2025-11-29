@@ -19,6 +19,8 @@ const GastosCartao = React.lazy(() => import('./pages/cartoes/GastosCartao').the
 const Bancos = React.lazy(() => import('./pages/bancos/Bancos').then(module => ({ default: module.Bancos })));
 const Relatorios = React.lazy(() => import('./pages/relatorios/Relatorios').then(module => ({ default: module.Relatorios })));
 const Settings = React.lazy(() => import('./pages/settings/Settings').then(module => ({ default: module.Settings })));
+const Metas = React.lazy(() => import('./pages/metas/Metas').then(module => ({ default: module.Metas })));
+const Orcamentos = React.lazy(() => import('./pages/orcamentos/Orcamentos').then(module => ({ default: module.Orcamentos })));
 
 const LoadingFallback = () => (
   <div className="flex items-center justify-center h-screen bg-gray-50 dark:bg-gray-900">
@@ -51,6 +53,8 @@ function App() {
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/receitas" element={<Receitas />} />
                   <Route path="/despesas" element={<Despesas />} />
+                  <Route path="/metas" element={<Metas />} />
+                  <Route path="/orcamentos" element={<Orcamentos />} />
                   <Route path="/cartoes" element={<Cartoes />} />
                   <Route path="/cartoes/:id/gastos" element={<GastosCartao />} />
                   <Route path="/bancos" element={<Bancos />} />

@@ -8,6 +8,8 @@ import {
     CreditCard,
     Landmark,
     PieChart,
+    Target,
+    Calculator,
     Settings,
     LogOut,
     X
@@ -29,6 +31,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed }
         { icon: LayoutDashboard, label: 'Dashboard', to: '/dashboard' },
         { icon: TrendingUp, label: 'Receitas', to: '/receitas' },
         { icon: TrendingDown, label: 'Despesas', to: '/despesas' },
+        { icon: Target, label: 'Metas', to: '/metas' },
+        { icon: Calculator, label: 'Orçamentos', to: '/orcamentos' },
         { icon: CreditCard, label: 'Cartões', to: '/cartoes' },
         { icon: Landmark, label: 'Bancos', to: '/bancos' },
         { icon: PieChart, label: 'Relatórios', to: '/relatorios' },
