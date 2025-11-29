@@ -21,6 +21,7 @@ const Relatorios = React.lazy(() => import('./pages/relatorios/Relatorios').then
 const Settings = React.lazy(() => import('./pages/settings/Settings').then(module => ({ default: module.Settings })));
 const Metas = React.lazy(() => import('./pages/metas/Metas').then(module => ({ default: module.Metas })));
 const Orcamentos = React.lazy(() => import('./pages/orcamentos/Orcamentos').then(module => ({ default: module.Orcamentos })));
+const Import = React.lazy(() => import('./pages/import/Import'));
 
 const LoadingFallback = () => (
   <div className="flex items-center justify-center h-screen bg-gray-50 dark:bg-gray-900">
@@ -58,6 +59,7 @@ function App() {
                   <Route path="/cartoes" element={<Cartoes />} />
                   <Route path="/cartoes/:id/gastos" element={<GastosCartao />} />
                   <Route path="/bancos" element={<Bancos />} />
+                  <Route path="/importar" element={<Import />} />
                   <Route path="/relatorios" element={<Relatorios />} />
                   <Route path="/configuracoes" element={<Settings />} />
                 </Route>

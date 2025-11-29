@@ -12,7 +12,8 @@ import {
     Calculator,
     Settings,
     LogOut,
-    X
+    X,
+    Upload
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useAuth } from '../../context/AuthContext';
@@ -35,6 +36,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed }
         { icon: Calculator, label: 'Orçamentos', to: '/orcamentos' },
         { icon: CreditCard, label: 'Cartões', to: '/cartoes' },
         { icon: Landmark, label: 'Bancos', to: '/bancos' },
+        { icon: Upload, label: 'Importar', to: '/importar' },
         { icon: PieChart, label: 'Relatórios', to: '/relatorios' },
         { icon: Settings, label: 'Configurações', to: '/configuracoes' },
     ];
