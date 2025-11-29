@@ -3,6 +3,7 @@ import { type Meta, type MetaFormData, META_CATEGORIAS, META_CORES } from '../..
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { Select } from '../ui/Select';
+import { CurrencyInput } from '../ui/CurrencyInput';
 import { X } from 'lucide-react';
 
 interface MetaFormProps {
@@ -60,24 +61,21 @@ export function MetaForm({ initialData, onSubmit, onCancel, isLoading }: MetaFor
                 required
                 placeholder="Ex: Viagem para Europa"
                 fullWidth
+                autoFocus
             />
 
             <div className="grid grid-cols-2 gap-4">
-                <Input
-                    label="Valor Alvo (R$)"
-                    type="number"
-                    step="0.01"
+                <CurrencyInput
+                    label="Valor Alvo"
                     value={formData.valor_alvo}
-                    onChange={(e) => setFormData({ ...formData, valor_alvo: Number(e.target.value) })}
+                    onChange={(val) => setFormData({ ...formData, valor_alvo: val })}
                     required
                     fullWidth
                 />
-                <Input
-                    label="Valor Inicial (R$)"
-                    type="number"
-                    step="0.01"
+                <CurrencyInput
+                    label="Valor Inicial"
                     value={formData.valor_atual}
-                    onChange={(e) => setFormData({ ...formData, valor_atual: Number(e.target.value) })}
+                    onChange={(val) => setFormData({ ...formData, valor_atual: val })}
                     required
                     fullWidth
                     disabled={!!initialData} // Não permitir editar valor atual diretamente na edição, usar contribuições

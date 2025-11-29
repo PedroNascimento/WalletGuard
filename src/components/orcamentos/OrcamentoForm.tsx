@@ -3,6 +3,7 @@ import { type Orcamento, type OrcamentoFormData, type OrcamentoCategoria, MESES,
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { Select } from '../ui/Select';
+import { CurrencyInput } from '../ui/CurrencyInput';
 import { X, Plus, Trash2 } from 'lucide-react';
 import { formatCurrency } from '../../utils/financial';
 
@@ -120,6 +121,7 @@ export function OrcamentoForm({ initialData, onSubmit, onCancel, isLoading }: Or
                         onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
                         required
                         fullWidth
+                        autoFocus
                     />
                 </div>
 
@@ -164,13 +166,10 @@ export function OrcamentoForm({ initialData, onSubmit, onCancel, isLoading }: Or
                         />
                     </div>
                     <div className="flex-1">
-                        <Input
-                            label="Limite (R$)"
-                            type="number"
+                        <CurrencyInput
+                            label="Limite"
                             value={newCat.valor}
-                            onChange={(e) => setNewCat({ ...newCat, valor: Number(e.target.value) })}
-                            min="0"
-                            step="0.01"
+                            onChange={(val) => setNewCat({ ...newCat, valor: val })}
                             fullWidth
                         />
                     </div>

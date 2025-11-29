@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
+import { CurrencyInput } from '../ui/CurrencyInput';
 import { X } from 'lucide-react';
 
 interface ContribuicaoFormProps {
@@ -32,14 +33,11 @@ export function ContribuicaoForm({ metaTitulo, onSubmit, onCancel, isLoading }: 
                 </Button>
             </div>
 
-            <Input
-                label="Valor da Contribuição (R$)"
-                type="number"
-                step="0.01"
+            <CurrencyInput
+                label="Valor da Contribuição"
                 value={valor}
-                onChange={(e) => setValor(Number(e.target.value))}
+                onChange={setValor}
                 required
-                min="0.01"
                 fullWidth
                 autoFocus
             />
